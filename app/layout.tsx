@@ -5,7 +5,7 @@ import Sidebar from './components/Sidebar';
 import { twMerge } from 'tailwind-merge';
 import Provider from './components/Provider';
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from './utils/authOptions';
 
 const font = Figtree({ subsets: ['latin'] });
 
