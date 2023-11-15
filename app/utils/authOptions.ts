@@ -11,15 +11,12 @@ export const authOptions: AuthOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async jwt({ token, account }) {
-      if (account) {
-        token.id = account.id;
-        token.expiresAt = account.expires_at;
-        token.accessToken = account.access_token;
-        token.refreshToken = account.refresh_token;
-      }
+    async jwt({ token }) {
+      const issuedAt = new Date((token.iat as number) * 1000);
+      const expiresAt = new Date(issuedAt.getTime() + 60 * 60 * 1000); // should expire after 1 hr
+      const currentTime = new Date();
 
-      if (account?.expires_at && Date.now() < account.expires_at) {
+      if (currentTime < expiresAt) {
         return token;
       }
 
@@ -34,9 +31,10 @@ export const authOptions: AuthOptions = {
 
 async function refreshAccessToken(token: JWT) {
   try {
+    console.log(token);
     const res = await fetch(
       `https://accounts.spotify.com/api/token?grant_type=refresh_token&refresh_token=${
-        token.refreshToken
+        process.env.REFRESH_TOKEN
       }&client_id=${process.env.CLIENT_ID!}&client_secret=${process.env
         .CLIENT_SECRET!}`,
       {

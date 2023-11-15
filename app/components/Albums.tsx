@@ -1,12 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import useToken from '../hooks/useToken';
 
 const Albums = () => {
-  const session: any = useSession();
-
-  const [token, setToken] = useState(null);
+  const token = useToken();
 
   // name, email, picture, sub
 
@@ -31,12 +29,8 @@ const Albums = () => {
       return await fetchWebApi('v1/browse/new-releases', 'GET');
     }
 
-    if (session.data) {
-      setToken(session.data.user.accessToken);
-
-      getNewReleases();
-    }
-  }, [token, session.data]);
+    getNewReleases();
+  }, [token]);
 
   return <div>Albums</div>;
 };
