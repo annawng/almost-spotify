@@ -31,7 +31,6 @@ export const authOptions: AuthOptions = {
 
 async function refreshAccessToken(token: JWT) {
   try {
-    console.log(token);
     const res = await fetch(
       `https://accounts.spotify.com/api/token?grant_type=refresh_token&refresh_token=${
         process.env.REFRESH_TOKEN

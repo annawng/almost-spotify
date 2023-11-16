@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Figtree } from 'next/font/google';
-import Sidebar from './components/Sidebar';
 import { twMerge } from 'tailwind-merge';
 import Provider from './components/Provider';
 import { getServerSession } from 'next-auth/next';
@@ -24,10 +23,7 @@ export default async function RootLayout({
   return (
     <html lang='en'>
       <body className={twMerge(`flex`, font.className)}>
-        <Provider session={session}>
-          <Sidebar />
-          {children}
-        </Provider>
+        <Provider session={session}>{children}</Provider>
       </body>
     </html>
   );
