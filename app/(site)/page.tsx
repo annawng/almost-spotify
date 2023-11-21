@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <>
       {isLoggedIn ? (
-        <DashboardLayout className='h-full flex-1 overflow-y-auto'>
+        <DashboardLayout className='h-full flex-1 overflow-y-auto p-6'>
           <Header>Welcome</Header>
           <Albums />
         </DashboardLayout>

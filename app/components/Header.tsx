@@ -15,12 +15,7 @@ const Header: FC<HeaderProps> = ({ children, className }) => {
   };
 
   return (
-    <div
-      className={twMerge(
-        `h-fit bg-gradient-to-b from-emerald-800 p-6`,
-        className
-      )}
-    >
+    <div className={twMerge(`text-3xl font-semibold`, className)}>
       <div></div>
       {children}
     </div>
