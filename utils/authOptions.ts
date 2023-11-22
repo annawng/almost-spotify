@@ -19,6 +19,7 @@ export const authOptions: AuthOptions = {
       const expiresAt = new Date(issuedAt.getTime() + 60 * 60 * 1000); // should expire after 1 hr
       const currentTime = new Date();
 
+      // should only be updating issuedAt and expiresAt when a new token is issued
       if (currentTime < expiresAt) {
         return token;
       }
