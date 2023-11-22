@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { FC, useMemo } from 'react';
+import { useMemo } from 'react';
 import { HiOutlineSearch as Search } from 'react-icons/hi';
 import { VscHome as Home } from 'react-icons/vsc';
 import SidebarItem from './SidebarItem';
@@ -9,11 +9,7 @@ import Library from './Library';
 import ProfilePreview from './ProfilePreview';
 import Playlists from './Playlists';
 
-interface SidebarProps {
-  // children: ReactNode;
-}
-
-const Sidebar: FC<SidebarProps> = () => {
+const Sidebar = () => {
   const pathname = usePathname();
 
   const routes = useMemo(

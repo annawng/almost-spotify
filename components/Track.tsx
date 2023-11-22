@@ -20,8 +20,8 @@ const Track = ({ track, index }: { track: TrackType; index: number }) => {
   return (
     <div
       className={`grid ${
-        album ? 'grid-cols-[1fr_32fr_24fr_1fr]' : 'grid-cols-[1fr_32fr_1fr]'
-      } grid-flow-row items-center gap-8 hover:bg-neutral-800 transition px-4 py-2 rounded-md`}
+        album ? 'grid-cols-[0.5fr_12fr_8fr_2fr]' : 'grid-cols-[0.5fr_12fr_2fr]'
+      } grid-flow-row items-center gap-4 hover:bg-neutral-800 transition px-4 py-2 rounded-md [&>*]:min-w-full`}
     >
       <p className='text-center text-neutral-400'>{index}</p>
       <div className='flex gap-6 items-center min-w-0'>

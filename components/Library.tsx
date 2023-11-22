@@ -29,7 +29,7 @@ const Library: FC<LibraryProps> = () => {
       {
         label: 'Liked Songs',
         active: pathname === '/liked-songs',
-        href: '/songs',
+        href: '/liked-songs',
         icon: Heart,
       },
     ],

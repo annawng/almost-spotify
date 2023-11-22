@@ -7,6 +7,7 @@ import useToken from '@/hooks/useToken';
 import fetchWebApi from '@/utils/fetchWebApi';
 import Track, { TrackType } from '@/components/Track';
 import getArtists from '@/utils/getArtists';
+import useName from '@/hooks/useName';
 
 interface CollectionInfo {
   name: string;
@@ -15,31 +16,39 @@ interface CollectionInfo {
 }
 
 const Collection = ({
-  id,
+  endpoint,
   isPlaylist,
+  isLikedSongs,
 }: {
-  id: string;
-  isPlaylist: boolean; // otherwise is an album
+  endpoint: string;
+  isPlaylist?: boolean; // otherwise is an album
+  isLikedSongs?: boolean;
 }) => {
   const token = useToken();
   const [tracks, setTracks] = useState<TrackType[]>();
   const [collectionInfo, setCollectionInfo] = useState<CollectionInfo>();
 
+  const userName = useName();
+
   useEffect(() => {
     async function getPlaylist() {
-      const json = await fetchWebApi(
-        token,
-        `v1/${isPlaylist ? 'playlists' : 'albums'}/${id}`,
-        'GET'
-      );
+      const json = await fetchWebApi(token, `v1/${endpoint}?limit=50`, 'GET');
 
       if (isPlaylist) {
-        const { name, images, owner } = json;
-        setCollectionInfo({
-          name,
-          image: images[0].url,
-          owner: owner.display_name,
-        });
+        if (isLikedSongs) {
+          setCollectionInfo({
+            name: 'Liked Songs',
+            image: 'https://misc.scdn.co/liked-songs/liked-songs-300.png', // TODO: use some random heart photo idk
+            owner: userName,
+          });
+        } else {
+          const { name, images, owner } = json;
+          setCollectionInfo({
+            name,
+            image: images[0].url,
+            owner: owner.display_name,
+          });
+        }
       } else {
         const { name, images, artists } = json;
         setCollectionInfo({
@@ -49,7 +58,9 @@ const Collection = ({
         });
       }
 
-      const songs = json.tracks.items.map((item: any) => {
+      const items = json.tracks ? json.tracks.items : json.items;
+
+      const songs = items.map((item: any) => {
         if (isPlaylist) {
           const { album, artists, duration_ms, id, name } = item.track;
           return {
@@ -75,7 +86,7 @@ const Collection = ({
     }
 
     getPlaylist();
-  }, [token, id, isPlaylist]);
+  }, [token, userName, endpoint, isPlaylist, isLikedSongs]);
 
   return (
     <>
@@ -93,9 +104,7 @@ const Collection = ({
               <p className='text-neutral-400 uppercase text-sm'>
                 {isPlaylist ? 'Playlist' : 'Album'}
               </p>
-              <h1 className='font-bold text-5xl leading-snug'>
-                {collectionInfo.name}
-              </h1>
+              <h1 className='font-bold text-5xl'>{collectionInfo.name}</h1>
               <p className='font-medium'>{collectionInfo.owner}</p>
             </div>
           </div>
