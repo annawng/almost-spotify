@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Albums from '../../components/Albums';
 import Header from '../../components/Header';
 import Login from '../../components/Login';
 import useToken from '../../hooks/useToken';
@@ -22,7 +21,6 @@ export default function Home() {
       {isLoggedIn ? (
         <>
           <Header>Welcome</Header>
-          <Albums />
         </>
       ) : (
         <Login />
