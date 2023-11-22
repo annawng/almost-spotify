@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 
-import Album, { AlbumType } from './Album';
+import AlbumPreview, { AlbumType } from './AlbumPreview';
 import useToken from '@/hooks/useToken';
 import fetchWebApi from '@/utils/fetchWebApi';
+import getArtists from '@/utils/getArtists';
 
 const Albums = () => {
   const token = useToken();
@@ -15,7 +16,12 @@ const Albums = () => {
       const json = await fetchWebApi(token, 'v1/me/albums?limit=50', 'GET');
       const albums = json.items.map((item: any) => {
         const { artists, id, images, name } = item.album;
-        return { id, name, artist: artists[0].name, image: images[1].url };
+        return {
+          id,
+          name,
+          artist: getArtists(artists),
+          image: images[1].url,
+        };
       });
       setAlbums(albums);
     }
@@ -27,7 +33,7 @@ const Albums = () => {
     <>
       {albums &&
         albums.map((album: AlbumType) => {
-          return <Album key={album.id} album={album} />;
+          return <AlbumPreview key={album.id} album={album} />;
         })}
     </>
   );

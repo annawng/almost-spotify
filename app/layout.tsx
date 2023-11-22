@@ -2,10 +2,10 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Figtree } from 'next/font/google';
 import { twMerge } from 'tailwind-merge';
-import Provider from '../components/Provider';
+import Provider from '@/components/Provider';
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../utils/authOptions';
-import Sidebar from '../components/Sidebar';
+import { authOptions } from '@/utils/authOptions';
+import Sidebar from '@/components/Sidebar';
 
 const font = Figtree({ subsets: ['latin'] });
 
