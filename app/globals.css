@@ -22,11 +22,16 @@ body,
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #444;
+  background-color: #444;
+  visibility: hidden;
   border-radius: 8px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background-color: #555;
+}
+
+.overflow-y-scroll:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
 }

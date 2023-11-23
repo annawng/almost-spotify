@@ -27,7 +27,7 @@ export default async function RootLayout({
         <Provider session={session}>
           <>
             <Sidebar />
-            <main className='h-full flex-1 overflow-y-auto p-6'>
+            <main className='h-full flex-1 overflow-y-scroll p-6'>
               {children}
             </main>
           </>
