@@ -9,7 +9,7 @@ export interface TrackType {
   duration_ms: number;
 }
 
-const Track = ({ track, index }: { track: TrackType; index: number }) => {
+const Track = ({ track, index }: { track: TrackType; index?: number }) => {
   let { id, name, artist, album, image, duration_ms } = track;
   const d = new Date(duration_ms);
   const duration = `${d.getMinutes()}:${String(d.getSeconds()).padStart(
@@ -17,13 +17,19 @@ const Track = ({ track, index }: { track: TrackType; index: number }) => {
     '0'
   )}`;
 
+  console.log(index);
+
   return (
     <div
       className={`grid ${
-        album ? 'grid-cols-[0.5fr_12fr_8fr_2fr]' : 'grid-cols-[0.5fr_12fr_2fr]'
+        album && index
+          ? 'grid-cols-[0.5fr_12fr_8fr_2fr]'
+          : index
+          ? 'grid-cols-[0.5fr_12fr_2fr]'
+          : 'grid-cols-[12fr_8fr_2fr]'
       } grid-flow-row items-center gap-4 hover:bg-neutral-800 transition px-4 py-2 rounded-md [&>*]:min-w-full`}
     >
-      <p className='text-center text-neutral-400'>{index}</p>
+      {index && <p className='text-center text-neutral-400'>{index}</p>}
       <div className='flex gap-6 items-center min-w-0'>
         {image && (
           <Image
@@ -39,7 +45,7 @@ const Track = ({ track, index }: { track: TrackType; index: number }) => {
           <p className='truncate text-neutral-400 text-sm'>{artist}</p>
         </div>
       </div>
-      {album && <p className='text-neutral-400'>{album}</p>}
+      {album && <p className='truncate text-neutral-400'>{album}</p>}
       <p className='text-right text-neutral-400'>{duration}</p>
     </div>
   );

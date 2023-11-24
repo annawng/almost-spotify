@@ -1,13 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 import useToken from '@/hooks/useToken';
 import fetchWebApi from '@/utils/fetchWebApi';
 import Track, { TrackType } from '@/components/Track';
 import getArtists from '@/utils/getArtists';
 import useName from '@/hooks/useName';
+import CollectionHeader from './CollectionHeader';
 
 interface CollectionInfo {
   name: string;
@@ -17,12 +17,16 @@ interface CollectionInfo {
 
 const Collection = ({
   endpoint,
-  isPlaylist,
-  isLikedSongs,
+  isPlaylist = false,
+  isLikedSongs = false,
+  showHeader = true,
+  showIndex = true,
 }: {
   endpoint: string;
   isPlaylist?: boolean; // otherwise is an album
   isLikedSongs?: boolean;
+  showHeader?: boolean;
+  showIndex?: boolean;
 }) => {
   const token = useToken();
   const [tracks, setTracks] = useState<TrackType[]>();
@@ -34,28 +38,30 @@ const Collection = ({
     async function getPlaylist() {
       const json = await fetchWebApi(token, `v1/${endpoint}?limit=50`, 'GET');
 
-      if (isPlaylist) {
-        if (isLikedSongs) {
-          setCollectionInfo({
-            name: 'Liked Songs',
-            image: 'https://misc.scdn.co/liked-songs/liked-songs-300.png', // TODO: use some random heart photo idk
-            owner: userName,
-          });
+      if (showHeader) {
+        if (isPlaylist) {
+          if (isLikedSongs) {
+            setCollectionInfo({
+              name: 'Liked Songs',
+              image: 'https://misc.scdn.co/liked-songs/liked-songs-300.png',
+              owner: userName,
+            });
+          } else {
+            const { name, images, owner } = json;
+            setCollectionInfo({
+              name,
+              image: images[0].url,
+              owner: owner.display_name,
+            });
+          }
         } else {
-          const { name, images, owner } = json;
+          const { name, images, artists } = json;
           setCollectionInfo({
             name,
             image: images[0].url,
-            owner: owner.display_name,
+            owner: getArtists(artists),
           });
         }
-      } else {
-        const { name, images, artists } = json;
-        setCollectionInfo({
-          name,
-          image: images[0].url,
-          owner: getArtists(artists),
-        });
       }
 
       const items = json.tracks ? json.tracks.items : json.items;
@@ -86,36 +92,23 @@ const Collection = ({
     }
 
     getPlaylist();
-  }, [token, userName, endpoint, isPlaylist, isLikedSongs]);
+  }, [token, userName, endpoint, isPlaylist, isLikedSongs, showHeader]);
 
   return (
     <>
-      {collectionInfo && (
-        <div>
-          <div className='flex items-end gap-8 mb-16'>
-            <Image
-              src={collectionInfo.image}
-              alt=''
-              width={240}
-              height={240}
-              className='aspect-square object-cover'
-            />
-            <div className='flex flex-col gap-2'>
-              <p className='text-neutral-400 uppercase text-sm'>
-                {isPlaylist ? 'Playlist' : 'Album'}
-              </p>
-              <h1 className='font-bold text-5xl'>{collectionInfo.name}</h1>
-              <p className='font-medium'>{collectionInfo.owner}</p>
-            </div>
-          </div>
-          <div className='flex flex-col'>
-            {tracks &&
-              tracks.map((track: TrackType, index: number) => (
-                <Track key={track.id} track={track} index={index + 1} />
-              ))}
-          </div>
-        </div>
+      {collectionInfo && showHeader && (
+        <CollectionHeader {...collectionInfo} isPlaylist={isPlaylist} />
       )}
+      <div className='flex flex-col'>
+        {tracks &&
+          tracks.map((track: TrackType, index: number) => (
+            <Track
+              key={index}
+              track={track}
+              index={showIndex ? index + 1 : undefined}
+            />
+          ))}
+      </div>
     </>
   );
 };

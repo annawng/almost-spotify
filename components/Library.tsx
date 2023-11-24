@@ -15,7 +15,7 @@ const Library: FC<LibraryProps> = () => {
   const routes = useMemo(
     () => [
       {
-        label: 'Recents',
+        label: 'History',
         active: pathname === '/history',
         href: '/history',
         icon: Clock,
