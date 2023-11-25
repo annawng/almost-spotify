@@ -1,10 +1,9 @@
 'use client';
 
 import { twMerge } from 'tailwind-merge';
-import { PiQueue as Queue } from 'react-icons/pi';
-import { IoVolumeMediumOutline as Volume } from 'react-icons/io5';
-import Slider from '@mui/material/Slider';
+
 import PlaybackControls from './PlaybackControls';
+import SecondaryControls from './SecondaryControls';
 
 const PlaybackBar = ({ className }: { className?: string }) => {
   return (
@@ -15,21 +14,11 @@ const PlaybackBar = ({ className }: { className?: string }) => {
       )}
     >
       <div className='w-[30%]'></div>
-      <PlaybackControls />
+      <div className='flex flex-col items-center gap-1 w-[40%] max-w-[722px]'>
+        <PlaybackControls />
+      </div>
       <div className='w-[30%] flex items-center gap-4 justify-end'>
-        <button>
-          <Queue size={24} />
-        </button>
-        <div className='flex items-center gap-2'>
-          <button>
-            <Volume size={28} />
-          </button>
-          <Slider
-            aria-label='Volume'
-            defaultValue={100}
-            className='w-24 text-white'
-          />
-        </div>
+        <SecondaryControls />
       </div>
     </section>
   );

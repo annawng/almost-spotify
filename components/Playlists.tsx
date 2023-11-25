@@ -11,7 +11,8 @@ const Playlists = () => {
 
   useEffect(() => {
     async function getPlaylists() {
-      const json = await fetchWebApi(token, 'v1/me/playlists?limit=50', 'GET');
+      const res = await fetchWebApi(token, 'v1/me/playlists?limit=50', 'GET');
+      const json = await res.json();
       const playlists = json.items.map((item: any) => {
         const { id, name } = item;
         return { id, name };

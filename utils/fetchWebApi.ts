@@ -11,5 +11,5 @@ export default async function fetchWebApi(
     method,
     body: JSON.stringify(body),
   });
-  return await res.json();
+  return await res;
 }

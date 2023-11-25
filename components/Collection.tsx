@@ -36,7 +36,8 @@ const Collection = ({
 
   useEffect(() => {
     async function getPlaylist() {
-      const json = await fetchWebApi(token, `v1/${endpoint}?limit=50`, 'GET');
+      const res = await fetchWebApi(token, `v1/${endpoint}?limit=50`, 'GET');
+      const json = await res.json();
 
       if (showHeader) {
         if (isPlaylist) {

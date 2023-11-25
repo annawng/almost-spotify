@@ -8,7 +8,7 @@ import { RxShuffle as Shuffle, RxLoop as Loop } from 'react-icons/rx';
 
 const PlaybackControls = ({ disabled = false }: { disabled?: boolean }) => {
   return (
-    <div className='flex flex-col items-center gap-1 w-[40%] max-w-[722px]'>
+    <>
       <div className='flex items-center gap-4'>
         <button disabled={disabled} className='disabled:opacity-40'>
           <Shuffle size={20} />
@@ -34,7 +34,7 @@ const PlaybackControls = ({ disabled = false }: { disabled?: boolean }) => {
         <progress className='progress h-1' value={0}></progress>
         <p className='shrink-0'>-:--</p>
       </div>
-    </div>
+    </>
   );
 };
 
