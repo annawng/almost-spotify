@@ -6,6 +6,7 @@ import Provider from '@/components/Provider';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/utils/authOptions';
 import Sidebar from '@/components/Sidebar';
+import PlaybackBar from '@/components/PlaybackBar';
 
 const font = Figtree({ subsets: ['latin'] });
 
@@ -23,14 +24,16 @@ export default async function RootLayout({
 
   return (
     <html lang='en'>
-      <body className={twMerge(`flex`, font.className)}>
+      <body
+        className={twMerge(
+          `grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] max-h-screen`,
+          font.className
+        )}
+      >
         <Provider session={session}>
-          <>
-            <Sidebar />
-            <main className='h-full flex-1 overflow-y-scroll p-6'>
-              {children}
-            </main>
-          </>
+          <Sidebar className='flex min-h-0' />
+          <main className='h-full overflow-y-scroll p-6'>{children}</main>
+          <PlaybackBar className='col-span-2 w-full' />
         </Provider>
       </body>
     </html>

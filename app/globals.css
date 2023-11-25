@@ -10,28 +10,42 @@ body,
   color-scheme: dark;
 }
 
-/* width */
+/* Scrollbar */
+
 ::-webkit-scrollbar {
   width: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   display: none;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background-color: #444;
   visibility: hidden;
   border-radius: 8px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background-color: #555;
 }
 
 .overflow-y-scroll:hover::-webkit-scrollbar-thumb {
   visibility: visible;
+}
+
+/* Slider */
+
+.MuiSlider-thumb {
+  display: none;
+}
+
+.MuiSlider-root {
+  padding: 0;
+}
+
+.MuiSlider-root:hover .MuiSlider-thumb,
+.MuiSlider-thumb:is(.Mui-active) {
+  display: flex;
+  box-shadow: none;
 }

@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.18",
     "next": "14.0.2",
     "next-auth": "^4.24.5",
     "react": "^18",
@@ -21,6 +24,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "daisyui": "^4.4.6",
     "eslint": "^8",
     "eslint-config-next": "14.0.2",
     "postcss": "^8",

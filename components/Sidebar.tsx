@@ -3,13 +3,13 @@
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 import { HiOutlineSearch as Search } from 'react-icons/hi';
-import { VscHome as Home } from 'react-icons/vsc';
+import { HiOutlineHome as Home } from 'react-icons/hi2';
 import SidebarItem from './SidebarItem';
 import Library from './Library';
 import ProfilePreview from './ProfilePreview';
 import Playlists from './Playlists';
 
-const Sidebar = () => {
+const Sidebar = ({ className }: { className?: string }) => {
   const pathname = usePathname();
 
   const routes = useMemo(
@@ -30,7 +30,7 @@ const Sidebar = () => {
     [pathname]
   );
   return (
-    <div className='flex h-full'>
+    <div className={className}>
       <div className='hidden md:flex flex-col gap-10 p-6 bg-neutral-900 h-full w-[300px]'>
         <ProfilePreview avatar='' name='Anna Wang' />
         <div>
