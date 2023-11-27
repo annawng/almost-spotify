@@ -64,17 +64,25 @@ const WebPlayback = ({ children }: { children: React.ReactNode }) => {
   }, [token]);
 
   return (
-    <PlaybackBar
-      className='col-span-2 w-full'
-      isPlaying={isPlaying}
-      currentTrack={currentTrack}
-      position={position}
-      togglePlay={() => {
-        if (player) {
-          player.togglePlay();
-        }
-      }}
-    />
+    <>
+      {player && (
+        <PlaybackBar
+          className='col-span-2 w-full'
+          isPlaying={isPlaying}
+          currentTrack={currentTrack}
+          position={position}
+          togglePlay={() => {
+            player.togglePlay();
+          }}
+          previousTrack={() => {
+            player.previousTrack();
+          }}
+          nextTrack={() => {
+            player.nextTrack();
+          }}
+        />
+      )}
+    </>
   );
 };
 

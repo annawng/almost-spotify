@@ -9,12 +9,16 @@ const PlaybackBar = ({
   currentTrack,
   position,
   togglePlay,
+  previousTrack,
+  nextTrack,
   className,
 }: {
   isPlaying: boolean;
   currentTrack: any;
   position: number;
   togglePlay: () => void;
+  previousTrack: () => void;
+  nextTrack: () => void;
   className?: string;
 }) => {
   return (
@@ -26,11 +30,13 @@ const PlaybackBar = ({
       </div>
       <div className='flex flex-col items-center gap-1 w-[40%] max-w-[722px]'>
         <PlaybackControls
-          togglePlay={togglePlay}
           isPlaying={isPlaying}
           disabled={!currentTrack}
           position={position}
           duration={currentTrack && currentTrack.duration_ms}
+          togglePlay={togglePlay}
+          previousTrack={previousTrack}
+          nextTrack={nextTrack}
         />
       </div>
       <div className='w-[30%] flex items-center gap-4 justify-end'>

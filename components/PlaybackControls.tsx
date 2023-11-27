@@ -13,33 +13,51 @@ const PlaybackControls = ({
   position,
   duration,
   togglePlay,
+  previousTrack,
+  nextTrack,
 }: {
   disabled?: boolean;
   isPlaying?: boolean;
   position: number;
   duration: number;
   togglePlay: () => void;
+  previousTrack: () => void;
+  nextTrack: () => void;
 }) => {
   return (
     <>
       <div className='flex items-center gap-4'>
-        <button disabled={disabled} className='disabled:opacity-40'>
+        <button
+          disabled={disabled}
+          className='text-white opacity-60 disabled:opacity-40 hover:opacity-100 transition'
+        >
           <Shuffle size={20} />
         </button>
-        <button disabled={disabled} className='disabled:opacity-40'>
+        <button
+          disabled={disabled}
+          className='text-white opacity-60 disabled:opacity-40 hover:opacity-100 transition'
+          onClick={previousTrack}
+        >
           <Back size={24} />
         </button>
         <button
           disabled={disabled}
-          className='bg-white rounded-full p-[2px] disabled:opacity-40 text-black'
+          className='bg-white rounded-full p-[2px] disabled:opacity-40 text-black hover:scale-105 transition'
           onClick={togglePlay}
         >
           {isPlaying ? <Pause size={28} /> : <Play size={28} />}
         </button>
-        <button disabled={disabled} className='disabled:opacity-40'>
+        <button
+          disabled={disabled}
+          className='text-white opacity-60 disabled:opacity-40 hover:opacity-100 transition'
+          onClick={nextTrack}
+        >
           <Forward size={24} />
         </button>
-        <button disabled={disabled} className='disabled:opacity-40'>
+        <button
+          disabled={disabled}
+          className='text-white opacity-60 disabled:opacity-40 hover:opacity-100 transition'
+        >
           <Loop size={20} />
         </button>
       </div>
