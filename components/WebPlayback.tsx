@@ -27,7 +27,6 @@ const WebPlayback = ({ children }: { children: React.ReactNode }) => {
         getOAuthToken: (cb: React.FC) => {
           cb(token);
         },
-        volume: 0.5,
       });
 
       setPlayer(player);
@@ -83,6 +82,9 @@ const WebPlayback = ({ children }: { children: React.ReactNode }) => {
           }}
           nextTrack={() => {
             player.nextTrack();
+          }}
+          setVolume={(volume: number) => {
+            player.setVolume(volume);
           }}
         />
       )}

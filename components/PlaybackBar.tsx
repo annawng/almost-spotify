@@ -11,6 +11,7 @@ const PlaybackBar = ({
   togglePlay,
   previousTrack,
   nextTrack,
+  setVolume,
   className,
 }: {
   isPlaying: boolean;
@@ -19,6 +20,7 @@ const PlaybackBar = ({
   togglePlay: () => void;
   previousTrack: () => void;
   nextTrack: () => void;
+  setVolume: (volume: number) => void;
   className?: string;
 }) => {
   return (
@@ -40,7 +42,9 @@ const PlaybackBar = ({
         />
       </div>
       <div className='w-[30%] flex items-center gap-4 justify-end'>
-        <SecondaryControls />
+        <SecondaryControls
+          updateVolume={(volume: number) => setVolume(volume)}
+        />
       </div>
     </section>
   );

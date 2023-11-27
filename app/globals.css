@@ -34,20 +34,26 @@ body,
   visibility: visible;
 }
 
-/* Slider */
+/*
+  Slider
+  Note: duplicating selectors to increase specificity because something was
+  overriding these styles using a different class selector
+*/
 
-.MuiSlider-thumb {
+.MuiSlider-thumb.MuiSlider-thumb {
   display: none;
   width: 12px;
   height: 12px;
 }
 
-.MuiSlider-root {
+.MuiSlider-root.MuiSlider-root {
   padding: 0;
+  width: 6rem;
+  color: white;
 }
 
-.MuiSlider-root:hover .MuiSlider-thumb,
-.MuiSlider-thumb:is(.Mui-active) {
+.MuiSlider-root:hover .MuiSlider-thumb.MuiSlider-thumb,
+.MuiSlider-thumb.MuiSlider-thumb:is(.Mui-active) {
   display: flex;
   box-shadow: none;
 }

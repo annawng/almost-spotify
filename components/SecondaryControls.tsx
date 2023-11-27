@@ -5,21 +5,13 @@ import { PiQueue as Queue } from 'react-icons/pi';
 import { GoMute as Muted, GoUnmute as Unmuted } from 'react-icons/go';
 import Slider from '@mui/material/Slider';
 
-import fetchWebApi from '@/utils/fetchWebApi';
-import useToken from '@/hooks/useToken';
-
-const SecondaryControls = () => {
-  const token = useToken();
+const SecondaryControls = ({
+  updateVolume,
+}: {
+  updateVolume: (volume: number) => void;
+}) => {
   const [volume, setVolume] = useState(100);
   const [isMuted, setIsMuted] = useState(false);
-
-  async function setPlaybackVolume(volume: number) {
-    await fetchWebApi(
-      token,
-      `v1/me/player/volume?volume_percent=${volume}`,
-      'PUT'
-    );
-  }
 
   return (
     <>
@@ -35,10 +27,10 @@ const SecondaryControls = () => {
           onClick={() => {
             if (isMuted) {
               setIsMuted(false);
-              setPlaybackVolume(volume);
+              updateVolume(volume / 100);
             } else {
               setIsMuted(true);
-              setPlaybackVolume(0);
+              updateVolume(0);
             }
           }}
         >
@@ -56,7 +48,7 @@ const SecondaryControls = () => {
           }}
           onChangeCommitted={(_, newValue) => {
             setVolume(newValue as number);
-            setPlaybackVolume(newValue as number);
+            updateVolume((newValue as number) / 100);
           }}
           className='w-24 text-white'
         />
