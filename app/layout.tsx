@@ -6,7 +6,7 @@ import Provider from '@/components/Provider';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/utils/authOptions';
 import Sidebar from '@/components/Sidebar';
-import PlaybackBar from '@/components/PlaybackBar';
+import WebPlayback from '@/components/WebPlayback';
 
 const font = Figtree({ subsets: ['latin'] });
 
@@ -33,7 +33,7 @@ export default async function RootLayout({
         <Provider session={session}>
           <Sidebar className='flex min-h-0' />
           <main className='h-full overflow-y-scroll p-6'>{children}</main>
-          <PlaybackBar className='col-span-2 w-full' />
+          <WebPlayback>{children}</WebPlayback>
         </Provider>
       </body>
     </html>

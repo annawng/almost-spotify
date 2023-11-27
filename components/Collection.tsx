@@ -69,22 +69,24 @@ const Collection = ({
 
       const songs = items.map((item: any) => {
         if (isPlaylist) {
-          const { album, artists, duration_ms, id, name } = item.track;
+          const { album, artists, duration_ms, name, uri } = item.track;
           return {
             album: album.name,
             image: album.images[1].url,
             artist: getArtists(artists),
             duration_ms,
-            id,
             name,
+            uri,
+            context_uri: json.id ? `spotify:playlist:${json.id}` : undefined,
           };
         } else {
-          const { artists, duration_ms, id, name } = item;
+          const { artists, duration_ms, name, uri } = item;
           return {
             artist: getArtists(artists),
             duration_ms,
-            id,
             name,
+            uri,
+            context_uri: json.uri,
           };
         }
       });

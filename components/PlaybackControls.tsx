@@ -1,3 +1,4 @@
+import formatTime from '@/utils/formatTime';
 import { HiPause as Pause } from 'react-icons/hi2';
 import {
   RiSkipBackFill as Back,
@@ -6,7 +7,19 @@ import {
 } from 'react-icons/ri';
 import { RxShuffle as Shuffle, RxLoop as Loop } from 'react-icons/rx';
 
-const PlaybackControls = ({ disabled = false }: { disabled?: boolean }) => {
+const PlaybackControls = ({
+  disabled = false,
+  isPlaying = false,
+  position,
+  duration,
+  togglePlay,
+}: {
+  disabled?: boolean;
+  isPlaying?: boolean;
+  position: number;
+  duration: number;
+  togglePlay: () => void;
+}) => {
   return (
     <>
       <div className='flex items-center gap-4'>
@@ -18,9 +31,10 @@ const PlaybackControls = ({ disabled = false }: { disabled?: boolean }) => {
         </button>
         <button
           disabled={disabled}
-          className='bg-white rounded-full p-[2px] disabled:opacity-40'
+          className='bg-white rounded-full p-[2px] disabled:opacity-40 text-black'
+          onClick={togglePlay}
         >
-          <Pause size={28} className='text-black' />
+          {isPlaying ? <Pause size={28} /> : <Play size={28} />}
         </button>
         <button disabled={disabled} className='disabled:opacity-40'>
           <Forward size={24} />
@@ -30,9 +44,12 @@ const PlaybackControls = ({ disabled = false }: { disabled?: boolean }) => {
         </button>
       </div>
       <div className='flex gap-2 w-full items-center'>
-        <p className='shrink-0'>-:--</p>
-        <progress className='progress h-1' value={0}></progress>
-        <p className='shrink-0'>-:--</p>
+        <p className='shrink-0'>{disabled ? '-:--' : formatTime(position)}</p>
+        <progress
+          className='progress h-1'
+          value={position && duration && position / duration}
+        ></progress>
+        <p className='shrink-0'>{disabled ? '-:--' : formatTime(duration)}</p>
       </div>
     </>
   );

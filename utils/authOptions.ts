@@ -8,7 +8,7 @@ export const authOptions: AuthOptions = {
       clientId: process.env.CLIENT_ID!,
       clientSecret: process.env.CLIENT_SECRET!,
       authorization: `https://accounts.spotify.com/authorize?scope=${encodeURIComponent(
-        'user-read-email user-read-private user-read-recently-played user-read-playback-state playlist-read-private user-library-read user-library-modify'
+        'user-read-email user-read-private user-read-recently-played user-read-playback-state playlist-read-private user-library-read user-library-modify streaming'
       )}`,
     }),
   ],

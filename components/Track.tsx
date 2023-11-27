@@ -1,26 +1,44 @@
+import useToken from '@/hooks/useToken';
+import fetchWebApi from '@/utils/fetchWebApi';
+import formatTime from '@/utils/formatTime';
 import Image from 'next/image';
 
 export interface TrackType {
-  id: string;
+  uri: string;
   name: string;
   artist: string;
   album?: string;
   image?: string;
   duration_ms: number;
+  context_uri?: string;
 }
 
 const Track = ({ track, index }: { track: TrackType; index?: number }) => {
-  let { id, name, artist, album, image, duration_ms } = track;
-  const d = new Date(duration_ms);
-  const duration = `${d.getMinutes()}:${String(d.getSeconds()).padStart(
-    2,
-    '0'
-  )}`;
+  const token = useToken();
+  let { uri, name, artist, album, image, duration_ms, context_uri } = track;
+  const duration = formatTime(duration_ms);
 
-  console.log(index);
+  async function playTrack() {
+    const res = await fetchWebApi(token, `v1/me/player/devices`, 'GET');
+    const json = await res.json();
+    const device = json.devices.find(
+      (device: any) => device.name === 'Web Playback SDK'
+    );
+
+    const result = await fetchWebApi(
+      token,
+      `v1/me/player/play?device_id=${device.id}`,
+      'PUT',
+      {
+        context_uri: context_uri,
+        offset: { uri: uri },
+      }
+    );
+  }
 
   return (
     <div
+      onClick={playTrack}
       className={`grid ${
         album && index
           ? 'grid-cols-[0.5fr_12fr_8fr_2fr]'
