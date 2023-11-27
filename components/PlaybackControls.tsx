@@ -60,8 +60,10 @@ const PlaybackControls = ({
       <div className='flex items-center gap-4'>
         <button
           disabled={disabled}
-          className={`text-white opacity-60 disabled:opacity-40 hover:opacity-100 transition ${
-            shouldShuffle ? 'text-green-500 opacity-100' : ''
+          className={`disabled:opacity-40 hover:opacity-100 transition ${
+            shouldShuffle
+              ? 'text-green-500 opacity-100'
+              : 'text-white opacity-60'
           }`}
           onClick={toggleShuffle}
         >
@@ -90,8 +92,8 @@ const PlaybackControls = ({
         </button>
         <button
           disabled={disabled}
-          className={`text-white opacity-60 disabled:opacity-40 hover:opacity-100 transition ${
-            shouldLoop ? 'text-green-500 opacity-100' : ''
+          className={`disabled:opacity-40 hover:opacity-100 transition ${
+            shouldLoop ? 'text-green-500 opacity-100' : 'text-white opacity-60'
           }`}
           onClick={toggleLoop}
         >
