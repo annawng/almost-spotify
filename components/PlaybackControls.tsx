@@ -101,12 +101,16 @@ const PlaybackControls = ({
         </button>
       </div>
       <div className='flex gap-2 w-full items-center'>
-        <p className='shrink-0'>{disabled ? '-:--' : formatTime(position)}</p>
+        <p className='shrink-0 text-xs'>
+          {disabled ? '-:--' : formatTime(position)}
+        </p>
         <progress
           className='progress h-1'
           value={position && duration && position / duration}
         ></progress>
-        <p className='shrink-0'>{disabled ? '-:--' : formatTime(duration)}</p>
+        <p className='shrink-0 text-xs'>
+          {disabled ? '-:--' : formatTime(duration)}
+        </p>
       </div>
     </>
   );

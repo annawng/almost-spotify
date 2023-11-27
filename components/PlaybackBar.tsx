@@ -25,9 +25,12 @@ const PlaybackBar = ({
 }) => {
   return (
     <section
-      className={twMerge('flex justify-between items-center p-6', className)}
+      className={twMerge(
+        'flex justify-between items-center gap-4 p-6',
+        className
+      )}
     >
-      <div className='w-[30%]'>
+      <div className='w-[40%]'>
         {currentTrack && <CurrentlyPlaying currentTrack={currentTrack} />}
       </div>
       <div className='flex flex-col items-center gap-1 w-[40%] max-w-[722px]'>
@@ -41,7 +44,7 @@ const PlaybackBar = ({
           nextTrack={nextTrack}
         />
       </div>
-      <div className='w-[30%] flex items-center gap-4 justify-end'>
+      <div className='w-[40%] flex items-center gap-4 justify-end'>
         <SecondaryControls
           updateVolume={(volume: number) => setVolume(volume)}
         />
