@@ -4,10 +4,12 @@ import React, { useState, useEffect } from 'react';
 
 import useToken from '@/hooks/useToken';
 import PlaybackBar from './PlaybackBar';
+import { DeviceContextProvider } from '@/contexts/DeviceContext';
 
 const WebPlayback = ({ children }: { children: React.ReactNode }) => {
   const token = useToken();
   const [player, setPlayer] = useState<any>();
+  const [deviceId, setDeviceId] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(undefined);
   const [position, setPosition] = useState(0);
@@ -31,6 +33,7 @@ const WebPlayback = ({ children }: { children: React.ReactNode }) => {
       setPlayer(player);
 
       player.addListener('ready', ({ device_id }: { device_id: string }) => {
+        setDeviceId(device_id);
         console.log('Ready with Device ID', device_id);
       });
 
@@ -64,7 +67,8 @@ const WebPlayback = ({ children }: { children: React.ReactNode }) => {
   }, [token]);
 
   return (
-    <>
+    <DeviceContextProvider value={deviceId}>
+      <main className='h-full overflow-y-scroll p-6'>{children}</main>
       {player && (
         <PlaybackBar
           className='col-span-2 w-full'
@@ -82,7 +86,7 @@ const WebPlayback = ({ children }: { children: React.ReactNode }) => {
           }}
         />
       )}
-    </>
+    </DeviceContextProvider>
   );
 };
 

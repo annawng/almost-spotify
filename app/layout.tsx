@@ -1,9 +1,10 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Figtree } from 'next/font/google';
-import { twMerge } from 'tailwind-merge';
-import Provider from '@/components/Provider';
 import { getServerSession } from 'next-auth/next';
+import { twMerge } from 'tailwind-merge';
+
+import SessionProvider from '@/providers/SessionProvider';
 import { authOptions } from '@/utils/authOptions';
 import Sidebar from '@/components/Sidebar';
 import WebPlayback from '@/components/WebPlayback';
@@ -30,11 +31,10 @@ export default async function RootLayout({
           font.className
         )}
       >
-        <Provider session={session}>
+        <SessionProvider session={session}>
           <Sidebar className='flex min-h-0' />
-          <main className='h-full overflow-y-scroll p-6'>{children}</main>
           <WebPlayback>{children}</WebPlayback>
-        </Provider>
+        </SessionProvider>
       </body>
     </html>
   );

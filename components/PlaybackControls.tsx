@@ -1,4 +1,4 @@
-import formatTime from '@/utils/formatTime';
+import { useState } from 'react';
 import { HiPause as Pause } from 'react-icons/hi2';
 import {
   RiSkipBackFill as Back,
@@ -6,6 +6,11 @@ import {
   RiPlayFill as Play,
 } from 'react-icons/ri';
 import { RxShuffle as Shuffle, RxLoop as Loop } from 'react-icons/rx';
+
+import { useDeviceId } from '@/contexts/DeviceContext';
+import formatTime from '@/utils/formatTime';
+import fetchWebApi from '@/utils/fetchWebApi';
+import useToken from '@/hooks/useToken';
 
 const PlaybackControls = ({
   disabled = false,
@@ -24,12 +29,41 @@ const PlaybackControls = ({
   previousTrack: () => void;
   nextTrack: () => void;
 }) => {
+  const token = useToken();
+  const deviceId = useDeviceId();
+
+  const [shouldShuffle, setShouldShuffle] = useState(false);
+  const [shouldLoop, setShouldLoop] = useState(false);
+
+  const toggleShuffle = async () => {
+    await fetchWebApi(
+      token,
+      `v1/me/player/shuffle?device_id=${deviceId}&state=${!shouldShuffle}`,
+      'PUT'
+    );
+    setShouldShuffle(!shouldShuffle);
+  };
+
+  const toggleLoop = async () => {
+    await fetchWebApi(
+      token,
+      `v1/me/player/repeat?device_id=${deviceId}&state=${
+        shouldLoop ? 'off' : 'context'
+      }`,
+      'PUT'
+    );
+    setShouldLoop(!shouldLoop);
+  };
+
   return (
     <>
       <div className='flex items-center gap-4'>
         <button
           disabled={disabled}
-          className='text-white opacity-60 disabled:opacity-40 hover:opacity-100 transition'
+          className={`text-white opacity-60 disabled:opacity-40 hover:opacity-100 transition ${
+            shouldShuffle ? 'text-green-500 opacity-100' : ''
+          }`}
+          onClick={toggleShuffle}
         >
           <Shuffle size={20} />
         </button>
@@ -56,7 +90,10 @@ const PlaybackControls = ({
         </button>
         <button
           disabled={disabled}
-          className='text-white opacity-60 disabled:opacity-40 hover:opacity-100 transition'
+          className={`text-white opacity-60 disabled:opacity-40 hover:opacity-100 transition ${
+            shouldLoop ? 'text-green-500 opacity-100' : ''
+          }`}
+          onClick={toggleLoop}
         >
           <Loop size={20} />
         </button>

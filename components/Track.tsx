@@ -1,3 +1,4 @@
+import { useDeviceId } from '@/contexts/DeviceContext';
 import useToken from '@/hooks/useToken';
 import fetchWebApi from '@/utils/fetchWebApi';
 import formatTime from '@/utils/formatTime';
@@ -15,25 +16,16 @@ export interface TrackType {
 
 const Track = ({ track, index }: { track: TrackType; index?: number }) => {
   const token = useToken();
-  let { uri, name, artist, album, image, duration_ms, context_uri } = track;
+  const deviceId = useDeviceId();
+
+  const { uri, name, artist, album, image, duration_ms, context_uri } = track;
   const duration = formatTime(duration_ms);
 
   async function playTrack() {
-    const res = await fetchWebApi(token, `v1/me/player/devices`, 'GET');
-    const json = await res.json();
-    const device = json.devices.find(
-      (device: any) => device.name === 'Web Playback SDK'
-    );
-
-    const result = await fetchWebApi(
-      token,
-      `v1/me/player/play?device_id=${device.id}`,
-      'PUT',
-      {
-        context_uri: context_uri,
-        offset: { uri: uri },
-      }
-    );
+    await fetchWebApi(token, `v1/me/player/play?device_id=${deviceId}`, 'PUT', {
+      context_uri: context_uri,
+      offset: { uri: uri },
+    });
   }
 
   return (
