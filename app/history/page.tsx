@@ -8,7 +8,6 @@ const History = () => {
         endpoint={`me/player/recently-played`}
         isPlaylist
         showHeader={false}
-        showIndex={false}
       />
     </>
   );

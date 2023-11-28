@@ -20,13 +20,11 @@ const Collection = ({
   isPlaylist = false,
   isLikedSongs = false,
   showHeader = true,
-  showIndex = true,
 }: {
   endpoint: string;
   isPlaylist?: boolean; // otherwise is an album
   isLikedSongs?: boolean;
   showHeader?: boolean;
-  showIndex?: boolean;
 }) => {
   const token = useToken();
   const [tracks, setTracks] = useState<TrackType[]>();
@@ -72,6 +70,7 @@ const Collection = ({
           const { album, artists, duration_ms, name, uri } = item.track;
           return {
             album: album.name,
+            album_id: album.id,
             image: album.images[1].url,
             artist: getArtists(artists),
             duration_ms,
@@ -105,11 +104,7 @@ const Collection = ({
       <div className='flex flex-col'>
         {tracks &&
           tracks.map((track: TrackType, index: number) => (
-            <Track
-              key={index}
-              track={track}
-              index={showIndex ? index + 1 : undefined}
-            />
+            <Track key={index} track={track} index={index + 1} />
           ))}
       </div>
     </>
