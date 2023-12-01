@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HiPause as Pause } from 'react-icons/hi2';
 import {
   RiSkipBackFill as Back,
@@ -20,6 +20,7 @@ const PlaybackControls = ({
   togglePlay,
   previousTrack,
   nextTrack,
+  track,
 }: {
   disabled?: boolean;
   isPlaying?: boolean;
@@ -28,12 +29,40 @@ const PlaybackControls = ({
   togglePlay: () => void;
   previousTrack: () => void;
   nextTrack: () => void;
+  track: any;
 }) => {
   const token = useToken();
   const deviceId = useDeviceId();
 
   const [shouldShuffle, setShouldShuffle] = useState(false);
   const [shouldLoop, setShouldLoop] = useState(false);
+  const [progress, setProgress] = useState(position);
+  const [isUpdated, setIsUpdated] = useState(false);
+
+  useEffect(() => {
+    // Require update of progress bar when position or track changes
+    setIsUpdated(false);
+  }, [position, track]);
+
+  useEffect(() => {
+    if (!isUpdated) {
+      setProgress(position);
+      setIsUpdated(true);
+    }
+  }, [position, isUpdated]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (isPlaying) {
+        setProgress((progress) => progress + 1000);
+      } else {
+        setProgress(position);
+      }
+    }, 1000);
+
+    // Clear the interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [isPlaying, position, progress]);
 
   const toggleShuffle = async () => {
     await fetchWebApi(
@@ -66,13 +95,18 @@ const PlaybackControls = ({
               : 'text-white opacity-60'
           }`}
           onClick={toggleShuffle}
+          title={shouldShuffle ? 'Disable shuffle' : 'Enable shuffle'}
         >
           <Shuffle size={20} />
         </button>
         <button
           disabled={disabled}
           className='text-white opacity-60 disabled:opacity-40 hover:opacity-100 transition'
-          onClick={previousTrack}
+          onClick={() => {
+            previousTrack();
+            setProgress(0);
+          }}
+          title='Skip to previous track'
         >
           <Back size={24} />
         </button>
@@ -80,13 +114,18 @@ const PlaybackControls = ({
           disabled={disabled}
           className='bg-white rounded-full p-[2px] disabled:opacity-40 text-black hover:scale-105 transition'
           onClick={togglePlay}
+          title={isPlaying ? 'Pause' : 'Play'}
         >
           {isPlaying ? <Pause size={28} /> : <Play size={28} />}
         </button>
         <button
           disabled={disabled}
           className='text-white opacity-60 disabled:opacity-40 hover:opacity-100 transition'
-          onClick={nextTrack}
+          onClick={() => {
+            nextTrack();
+            setProgress(0);
+          }}
+          title='Skip to next track'
         >
           <Forward size={24} />
         </button>
@@ -96,17 +135,18 @@ const PlaybackControls = ({
             shouldLoop ? 'text-green-500 opacity-100' : 'text-white opacity-60'
           }`}
           onClick={toggleLoop}
+          title={shouldLoop ? 'Disable loop' : 'Enable loop'}
         >
           <Loop size={20} />
         </button>
       </div>
       <div className='flex gap-2 w-full items-center'>
         <p className='shrink-0 text-xs'>
-          {disabled ? '-:--' : formatTime(position)}
+          {disabled ? '-:--' : formatTime(progress)}
         </p>
         <progress
           className='progress h-1'
-          value={position && duration && position / duration}
+          value={progress / duration}
         ></progress>
         <p className='shrink-0 text-xs'>
           {disabled ? '-:--' : formatTime(duration)}

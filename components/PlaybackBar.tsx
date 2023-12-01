@@ -42,6 +42,7 @@ const PlaybackBar = ({
           togglePlay={togglePlay}
           previousTrack={previousTrack}
           nextTrack={nextTrack}
+          track={currentTrack}
         />
       </div>
       <div className='w-[40%] flex items-center gap-4 justify-end'>
