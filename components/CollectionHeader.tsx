@@ -12,7 +12,7 @@ const CollectionHeader = ({
   image: string;
 }) => {
   return (
-    <div className='flex items-end gap-8 mb-16'>
+    <div className='flex items-end gap-8 mb-16 max-w-full'>
       <Image
         src={image}
         alt=''
@@ -20,11 +20,13 @@ const CollectionHeader = ({
         height={240}
         className='aspect-square object-cover'
       />
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-2 min-w-0'>
         <p className='text-neutral-400 uppercase text-sm'>
           {isPlaylist ? 'Playlist' : 'Album'}
         </p>
-        <h1 className='font-bold text-5xl'>{name}</h1>
+        <h1 className='font-bold text-5xl text-ellipsis overflow-hidden leading-tight'>
+          {name}
+        </h1>
         <p className='font-medium'>{owner}</p>
       </div>
     </div>

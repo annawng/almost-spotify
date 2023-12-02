@@ -41,13 +41,13 @@ const Playlists = () => {
       <div className='flex flex-col gap-2 overflow-y-scroll'>
         {playlists &&
           playlists.map((playlist: any) => (
-            <Link
-              href={`/playlist/${playlist.id}`}
-              key={playlist.id}
-              className='text-neutral-400 hover:text-white transition'
-            >
-              {playlist.name}
-            </Link>
+            <div key={playlist.id} className='max-w-full'>
+              <Link href={`/playlist/${playlist.id}`}>
+                <p className='text-neutral-400 hover:text-white transition truncate'>
+                  {playlist.name}
+                </p>
+              </Link>
+            </div>
           ))}
       </div>
     </div>
