@@ -58,21 +58,35 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
           <Play
             size={24}
             title={`Play ${name} by ${artist}`}
-            className='m-auto hidden group-hover:block cursor-pointer'
+            className='text-white m-auto hidden group-hover:block cursor-pointer'
             onClick={playTrack}
           />
         </div>
       )}
       <div className='flex gap-6 items-center min-w-0'>
         {image && (
-          <Image
-            src={image}
-            alt={name}
-            width={48}
-            height={48}
-            className='min-w-[48]'
-          />
+          <div className={`relative ${!index && 'group-hover:cursor-pointer'}`}>
+            <Image
+              src={image}
+              alt={name}
+              width={48}
+              height={48}
+              className={`min-w-[48] ${
+                !index && 'group-hover:brightness-50 transition'
+              }`}
+            />
+
+            {!index && (
+              <Play
+                size={24}
+                title={`Play ${name} by ${artist}`}
+                className='text-white m-auto hidden group-hover:block absolute top-1/2 left-0 right-0 translate-y-[-50%]'
+                onClick={playTrack}
+              />
+            )}
+          </div>
         )}
+
         <div className='min-w-0'>
           <p className='truncate font-medium'>{name}</p>
           <p className='truncate text-sm'>{artist}</p>

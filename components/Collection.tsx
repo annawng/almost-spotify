@@ -20,11 +20,13 @@ const Collection = ({
   isPlaylist = false,
   isLikedSongs = false,
   showHeader = true,
+  showIndex = true,
 }: {
   endpoint: string;
   isPlaylist?: boolean; // otherwise is an album
   isLikedSongs?: boolean;
   showHeader?: boolean;
+  showIndex?: boolean;
 }) => {
   const token = useToken();
   const [tracks, setTracks] = useState<TrackType[]>();
@@ -104,7 +106,11 @@ const Collection = ({
       <div className='flex flex-col'>
         {tracks &&
           tracks.map((track: TrackType, index: number) => (
-            <Track key={index} track={track} index={index + 1} />
+            <Track
+              key={index}
+              track={track}
+              index={showIndex ? index + 1 : undefined}
+            />
           ))}
       </div>
     </>
