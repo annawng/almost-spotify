@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 interface ProfilePreviewProps {
-  avatar: string;
+  avatar?: string;
   name: string;
 }
 
@@ -11,9 +11,10 @@ const ProfilePreview: FC<ProfilePreviewProps> = ({ avatar, name }) => {
   return (
     <div className='flex items-center gap-4'>
       <Image
-        src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
-          name
-        )}&size=48`}
+        src={
+          avatar ??
+          `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&size=48`
+        }
         width='48'
         height='48'
         alt=''
@@ -22,12 +23,14 @@ const ProfilePreview: FC<ProfilePreviewProps> = ({ avatar, name }) => {
 
       <div className='flex flex-col gap-0'>
         <p>{name}</p>
-        <Link
-          href='/profile'
+        <button
           className='text-sm cursor-pointer hover:text-white transition text-neutral-400'
+          onClick={() => {
+            signOut();
+          }}
         >
-          View profile
-        </Link>
+          Log out
+        </button>
       </div>
     </div>
   );
