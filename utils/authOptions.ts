@@ -15,16 +15,19 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token }) {
-      const issuedAt = new Date((token.iat as number) * 1000);
-      const expiresAt = new Date(issuedAt.getTime() + 60 * 60 * 1000); // should expire after 1 hr
       const currentTime = new Date();
+      // on initial login, token.expiresAt will be undefined
+      const expiresAt = new Date(
+        token.expiresAt ? (token.expiresAt as number) : 0
+      );
 
-      // should only be updating issuedAt and expiresAt when a new token is issued
       if (currentTime < expiresAt) {
         return token;
       }
 
-      return refreshAccessToken(token);
+      // access token has expired, try to update it
+      const newToken = await refreshAccessToken(token);
+      return newToken;
     },
     async session({ session, token }) {
       session.user = token;
@@ -56,13 +59,10 @@ async function refreshAccessToken(token: JWT) {
 
     return {
       ...token,
-      expiresAt: refreshedToken.expires_at,
+      expiresAt: Date.now() + refreshedToken.expires_in * 1000,
       accessToken: refreshedToken.access_token,
-      refreshToken: refreshedToken.refresh_token ?? token.refreshToken,
     };
   } catch (error) {
-    console.log(error);
-
     return {
       ...token,
       error: 'RefreshAccessTokenError',
