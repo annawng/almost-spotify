@@ -26,14 +26,14 @@ const PlaybackBar = ({
   return (
     <section
       className={twMerge(
-        'flex justify-between items-center gap-4 p-6',
+        'flex justify-between items-center gap-4 py-4 px-6',
         className
       )}
     >
       <div className='w-[40%]'>
         {currentTrack && <CurrentlyPlaying currentTrack={currentTrack} />}
       </div>
-      <div className='flex flex-col items-center gap-1 w-[40%] max-w-[722px]'>
+      <div className='flex flex-col items-center gap-2 w-[40%] max-w-[722px]'>
         <PlaybackControls
           isPlaying={isPlaying}
           disabled={!currentTrack}

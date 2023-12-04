@@ -88,7 +88,7 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
         )}
 
         <div className='min-w-0'>
-          <p className='truncate font-medium'>{name}</p>
+          <p className='truncate font-medium text-white'>{name}</p>
           <p className='truncate text-sm'>{artist}</p>
         </div>
       </div>

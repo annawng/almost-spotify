@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 
-import AlbumPreview, { AlbumType } from './AlbumPreview';
+import AlbumPreview from './AlbumPreview';
+import { CollectionType } from './Preview';
 import useToken from '@/hooks/useToken';
 import fetchWebApi from '@/utils/fetchWebApi';
 import getArtists from '@/utils/getArtists';
@@ -33,7 +34,7 @@ const Albums = () => {
   return (
     <>
       {albums &&
-        albums.map((album: AlbumType) => {
+        albums.map((album: CollectionType) => {
           return <AlbumPreview key={album.id} album={album} />;
         })}
     </>

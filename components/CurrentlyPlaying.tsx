@@ -11,8 +11,8 @@ const CurrentlyPlaying = ({ currentTrack }: { currentTrack: any }) => {
     <div className='flex gap-4'>
       <Image src={image} alt='' width={56} height={56} />
       <div className='flex flex-col justify-center min-w-0'>
-        <p className='text-sm font-medium text-white truncate'>{name}</p>
-        <p className='text-xs truncate'>{artist}</p>
+        <p className='text-sm font-medium truncate'>{name}</p>
+        <p className='text-xs text-neutral-400 truncate'>{artist}</p>
       </div>
     </div>
   );
