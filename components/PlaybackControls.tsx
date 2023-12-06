@@ -146,7 +146,7 @@ const PlaybackControls = ({
         </p>
         <progress
           className='progress h-1'
-          value={progress / duration}
+          value={duration ? progress / duration : 0}
         ></progress>
         <p className='shrink-0 text-xs text-neutral-400'>
           {disabled ? '-:--' : formatTime(duration)}

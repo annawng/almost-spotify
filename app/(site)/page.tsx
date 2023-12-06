@@ -1,30 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
-import Login from '@/components/Login';
-import useToken from '@/hooks/useToken';
 
-export default function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
-  const token = useToken();
+const Home = () => {
+  const { status } = useSession();
 
-  useEffect(() => {
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, [token]);
+  if (status === 'unauthenticated') {
+    redirect('/login');
+  }
 
-  return (
-    <>
-      {isLoggedIn ? (
-        <>
-          <Header>Welcome</Header>
-        </>
-      ) : (
-        <Login />
-      )}
-    </>
-  );
-}
+  return <Header>Welcome</Header>;
+};
+
+export default Home;

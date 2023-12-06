@@ -21,7 +21,7 @@ const Albums = () => {
         return {
           id,
           name,
-          artist: getArtists(artists),
+          by: getArtists(artists),
           image: images[1].url,
         };
       });

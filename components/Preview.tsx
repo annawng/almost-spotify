@@ -29,7 +29,7 @@ const Preview = ({
         className='aspect-square object-cover box-shadow'
       />
       <div>
-        <h3 className='font-bold truncate'>{name}</h3>
+        <p className='font-bold truncate'>{name}</p>
         <p className='text-neutral-400 truncate'>{by}</p>
       </div>
     </Link>

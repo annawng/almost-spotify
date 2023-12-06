@@ -33,7 +33,6 @@ const WebPlayback = ({ children }: { children: React.ReactNode }) => {
 
       player.addListener('ready', ({ device_id }: { device_id: string }) => {
         setDeviceId(device_id);
-        console.log('Ready with Device ID', device_id);
       });
 
       player.addListener(

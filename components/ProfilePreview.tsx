@@ -26,7 +26,7 @@ const ProfilePreview: FC<ProfilePreviewProps> = ({ avatar, name }) => {
         <button
           className='text-sm cursor-pointer hover:text-white transition text-neutral-400'
           onClick={() => {
-            signOut();
+            signOut({ callbackUrl: '/login' });
           }}
         >
           Log out
