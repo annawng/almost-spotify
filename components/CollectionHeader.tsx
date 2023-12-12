@@ -12,7 +12,7 @@ const CollectionHeader = ({
   image: string;
 }) => {
   return (
-    <div className='flex items-end gap-8 mb-16 max-w-full'>
+    <div className='flex items-end gap-8 mb-6 max-w-full'>
       <Image
         src={image}
         alt=''

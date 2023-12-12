@@ -79,10 +79,10 @@ const SearchPage = () => {
 
   return (
     <>
-      <h1 className='font-bold text-3xl mb-6'>
+      <h1 className='font-bold text-4xl mb-5'>
         Search for a song, album, or playlist
       </h1>
-      <section className='relative mb-12'>
+      <section className='relative mb-10'>
         <Search
           size={20}
           className='absolute top-1/2 translate-y-[-50%] left-4'
@@ -97,7 +97,7 @@ const SearchPage = () => {
       <section className='flex flex-col gap-8'>
         {tracks.length !== 0 && (
           <div>
-            <h2 className='font-medium text-2xl mb-6'>Songs</h2>
+            <h2 className='font-semibold text-2xl mb-5'>Songs</h2>
             <ul>
               {tracks.map((track: TrackType) => (
                 <li key={track.uri}>
@@ -109,7 +109,7 @@ const SearchPage = () => {
         )}
         {albums.length !== 0 && (
           <div>
-            <h2 className='font-medium text-2xl mb-6'>Albums</h2>
+            <h2 className='font-semibold text-2xl mb-5'>Albums</h2>
             <ul className='max-w-full grid grid-cols-5 grid-flow-row gap-8'>
               {albums.map((album: CollectionType) => (
                 <li key={album.id}>
@@ -121,7 +121,7 @@ const SearchPage = () => {
         )}
         {playlists.length !== 0 && (
           <div>
-            <h2 className='font-medium text-2xl mb-6'>Playlists</h2>
+            <h2 className='font-semibold text-2xl mb-5'>Playlists</h2>
             <ul className='max-w-full grid grid-cols-5 grid-flow-row gap-8'>
               {playlists.map((playlist: CollectionType) => (
                 <li key={playlist.id}>

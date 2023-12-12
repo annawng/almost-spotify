@@ -54,7 +54,7 @@ const Recommended = () => {
     <>
       {recommendations && (
         <section>
-          <h2 className='font-medium text-2xl mb-6'>Recommended albums</h2>
+          <h2 className='font-semibold text-2xl mb-5'>Recommended albums</h2>
           <ul className='max-w-full grid grid-cols-5 grid-flow-row gap-8'>
             {recommendations.map((recommendation: CollectionType, index) => (
               <li key={index}>

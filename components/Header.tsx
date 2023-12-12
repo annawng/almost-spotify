@@ -11,7 +11,7 @@ const Header = () => {
     );
   }, []);
 
-  return <h1 className='text-3xl font-semibold'>{message}</h1>;
+  return <h1 className='text-4xl font-bold'>{message}</h1>;
 };
 
 export default Header;

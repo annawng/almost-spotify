@@ -71,7 +71,7 @@ const RecentlyPlayed = () => {
     <>
       {collections.length > 0 && (
         <section>
-          <h2 className='font-medium text-2xl mb-6'>Jump back in </h2>
+          <h2 className='font-semibold text-2xl mb-5'>Jump back in </h2>
           <ul className='max-w-full grid grid-cols-5 grid-flow-row gap-8'>
             {collections.map(({ type, ...rest }: CollectionWithType, index) => {
               return (

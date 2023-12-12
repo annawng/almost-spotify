@@ -10,7 +10,7 @@ const TopTracks = () => {
   return (
     <section>
       {isLoaded && (
-        <h2 className='font-medium text-2xl mb-6'>Your top tracks</h2>
+        <h2 className='font-semibold text-2xl mb-5'>Your top tracks</h2>
       )}
       <Collection
         endpoint={`me/top/tracks?limit=5`}
