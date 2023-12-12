@@ -67,7 +67,7 @@ const PlaybackControls = ({
   const toggleShuffle = async () => {
     await fetchWebApi(
       token,
-      `v1/me/player/shuffle?device_id=${deviceId}&state=${!shouldShuffle}`,
+      `me/player/shuffle?device_id=${deviceId}&state=${!shouldShuffle}`,
       'PUT'
     );
     setShouldShuffle(!shouldShuffle);
@@ -76,7 +76,7 @@ const PlaybackControls = ({
   const toggleLoop = async () => {
     await fetchWebApi(
       token,
-      `v1/me/player/repeat?device_id=${deviceId}&state=${
+      `me/player/repeat?device_id=${deviceId}&state=${
         shouldLoop ? 'off' : 'context'
       }`,
       'PUT'

@@ -4,7 +4,7 @@ export default async function fetchWebApi(
   method: string,
   body?: object
 ) {
-  const res = await fetch(`https://api.spotify.com/${endpoint}`, {
+  const res = await fetch(`https://api.spotify.com/v1/${endpoint}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

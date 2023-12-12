@@ -13,7 +13,7 @@ const Recommended = () => {
 
   useEffect(() => {
     async function getTopArtistIds() {
-      const res = await fetchWebApi(token, 'v1/me/top/artists?limit=5', 'GET');
+      const res = await fetchWebApi(token, 'me/top/artists?limit=5', 'GET');
       const json = await res.json();
       const ids = json.items.map((artist: any) => artist.id);
       setTopArtistIds(ids);
@@ -28,7 +28,7 @@ const Recommended = () => {
     async function getRecommendations() {
       const res = await fetchWebApi(
         token,
-        `v1/recommendations?seed_artists=${topArtistIds!.join()}&limit=5`,
+        `recommendations?seed_artists=${topArtistIds!.join()}&limit=5`,
         'GET'
       );
       const json = await res.json();

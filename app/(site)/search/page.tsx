@@ -21,7 +21,7 @@ const SearchPage = () => {
   useEffect(() => {
     async function search(query: string) {
       const params = `q=${query}&type=album,playlist,track&limit=5`;
-      const res = await fetchWebApi(token, `v1/search?${params}`, 'GET');
+      const res = await fetchWebApi(token, `search?${params}`, 'GET');
       const json = await res.json();
       const { albums, playlists, tracks } = json;
 

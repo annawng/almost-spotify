@@ -24,7 +24,7 @@ const Sidebar = ({ className }: { className?: string }) => {
 
   useEffect(() => {
     async function getUserInfo() {
-      const res = await fetchWebApi(token, `v1/me`, 'GET');
+      const res = await fetchWebApi(token, 'me', 'GET');
       const json = await res.json();
       const { display_name, images } = json;
       setUserInfo({

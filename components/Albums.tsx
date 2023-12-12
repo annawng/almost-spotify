@@ -14,7 +14,7 @@ const Albums = () => {
 
   useEffect(() => {
     async function getSavedAlbums() {
-      const res = await fetchWebApi(token, 'v1/me/albums?limit=50', 'GET');
+      const res = await fetchWebApi(token, 'me/albums?limit=50', 'GET');
       const json = await res.json();
       const albums = json.items.map((item: any) => {
         const { artists, id, images, name } = item.album;

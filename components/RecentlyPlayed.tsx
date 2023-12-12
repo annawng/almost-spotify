@@ -18,7 +18,7 @@ const RecentlyPlayed = () => {
     async function getRecentlyPlayed() {
       const res = await fetchWebApi(
         token,
-        'v1/me/player/recently-played?limit=50',
+        'me/player/recently-played?limit=50',
         'GET'
       );
       const json = await res.json();
@@ -36,7 +36,7 @@ const RecentlyPlayed = () => {
       setCollections([]);
       uris?.forEach(async (uri: string) => {
         const [_, type, id] = uri.split(':');
-        const res = await fetchWebApi(token, `v1/${type}s/${id}`, 'GET');
+        const res = await fetchWebApi(token, `${type}s/${id}`, 'GET');
         const json = await res.json();
         if (type === 'album') {
           const { id, name, artists, images, type } = json;

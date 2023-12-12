@@ -35,7 +35,7 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
   const duration = formatTime(duration_ms);
 
   async function playTrack() {
-    await fetchWebApi(token, `v1/me/player/play?device_id=${deviceId}`, 'PUT', {
+    await fetchWebApi(token, `me/player/play?device_id=${deviceId}`, 'PUT', {
       ...(context_uri
         ? { context_uri, offset: { uri: uri } }
         : { uris: [uri] }),
