@@ -1,25 +1,17 @@
-'use client';
+import { useState, useEffect } from 'react';
 
-import { useRouter } from 'next/navigation';
-import { useState, useEffect, ReactNode, FC } from 'react';
-import { twMerge } from 'tailwind-merge';
+const Header = () => {
+  const [message, setMessage] = useState<string>();
 
-interface HeaderProps {
-  children: ReactNode;
-  className?: string;
-}
+  useEffect(() => {
+    const hour = new Date().getHours();
+    setMessage(
+      'Good ' +
+        ((hour < 12 && 'morning') || (hour < 18 && 'afternoon') || 'evening')
+    );
+  }, []);
 
-const Header: FC<HeaderProps> = ({ children, className }) => {
-  const handleLogout = () => {
-    // handle logout
-  };
-
-  return (
-    <div className={twMerge(`text-3xl font-semibold`, className)}>
-      <div></div>
-      {children}
-    </div>
-  );
+  return <h1 className='text-3xl font-semibold'>{message}</h1>;
 };
 
 export default Header;

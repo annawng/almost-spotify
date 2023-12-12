@@ -5,7 +5,7 @@ import { signIn } from 'next-auth/react';
 const Login = () => {
   return (
     <main className='flex flex-col items-center gap-4 h-full justify-center'>
-      <h1 className='font-bold text-5xl'>Not Spotify</h1>
+      <h1 className='font-bold text-5xl'>Almost Spotify</h1>
       <p className='max-w-sm text-center mb-4'>
         It&apos;s like Spotify but with less features. Also, you need an account
         with Spotify Premium. Enjoy!

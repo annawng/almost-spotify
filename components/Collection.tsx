@@ -21,12 +21,14 @@ const Collection = ({
   isLikedSongs = false,
   showHeader = true,
   showIndex = true,
+  setIsLoaded,
 }: {
   endpoint: string;
   isPlaylist?: boolean; // otherwise is an album
   isLikedSongs?: boolean;
   showHeader?: boolean;
   showIndex?: boolean;
+  setIsLoaded?: () => void;
 }) => {
   const token = useToken();
   const [tracks, setTracks] = useState<TrackType[]>();
@@ -36,7 +38,7 @@ const Collection = ({
 
   useEffect(() => {
     async function getPlaylist() {
-      const res = await fetchWebApi(token, `v1/${endpoint}?limit=50`, 'GET');
+      const res = await fetchWebApi(token, `v1/${endpoint}`, 'GET');
       const json = await res.json();
 
       if (showHeader) {
@@ -69,7 +71,7 @@ const Collection = ({
 
       const songs = items.map((item: any) => {
         if (isPlaylist) {
-          const { album, artists, duration_ms, name, uri } = item.track;
+          const { album, artists, duration_ms, name, uri } = item.track ?? item;
           return {
             album: album.name,
             album_id: album.id,
@@ -93,10 +95,21 @@ const Collection = ({
       });
 
       setTracks(songs);
+      if (setIsLoaded) {
+        setIsLoaded();
+      }
     }
 
     getPlaylist();
-  }, [token, userName, endpoint, isPlaylist, isLikedSongs, showHeader]);
+  }, [
+    token,
+    userName,
+    endpoint,
+    isPlaylist,
+    isLikedSongs,
+    showHeader,
+    setIsLoaded,
+  ]);
 
   return (
     <>

@@ -1,6 +1,6 @@
 'use client';
 
-import Header from '@/components/Header';
+import Homepage from '@/components/Homepage';
 
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
@@ -12,7 +12,7 @@ const Home = () => {
     redirect('/login');
   }
 
-  return <Header>Welcome</Header>;
+  return <Homepage />;
 };
 
 export default Home;
