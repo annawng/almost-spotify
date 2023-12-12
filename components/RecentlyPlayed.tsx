@@ -22,7 +22,13 @@ const RecentlyPlayed = () => {
         'GET'
       );
       const json = await res.json();
-      const withContext = json.items.filter((item: any) => item.context);
+      const withContext = json.items.filter(
+        // Filter out artist context for the sake of simplicity
+        (item: any) =>
+          item.context !== null &&
+          (item.context.uri.includes('album') ||
+            item.context.uri.includes('playlist'))
+      );
       const contexts = withContext.map((item: any) => item.context.uri);
       const uniqueContexts = Array.from(new Set(contexts)).slice(0, 5);
       setUris(uniqueContexts as string[]);
