@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 
 import useToken from '@/hooks/useToken';
 import fetchWebApi from '@/utils/fetchWebApi';
+import { usePathname } from 'next/navigation';
+import { twMerge } from 'tailwind-merge';
 
 const Playlists = () => {
+  const pathname = usePathname();
   const token = useToken();
   const [playlists, setPlaylists] = useState<any[] | null>(null);
 
@@ -14,13 +17,13 @@ const Playlists = () => {
       const json = await res.json();
       const playlists = json.items.map((item: any) => {
         const { id, name } = item;
-        return { id, name };
+        return { id, name, active: pathname === `/playlist/${id}` };
       });
       setPlaylists(playlists);
     }
 
     getPlaylists();
-  }, [token]);
+  }, [token, pathname]);
 
   return (
     <div className='h-full flex flex-col gap-4'>
@@ -32,7 +35,12 @@ const Playlists = () => {
           playlists.map((playlist: any) => (
             <div key={playlist.id} className='max-w-full'>
               <Link href={`/playlist/${playlist.id}`}>
-                <p className='text-neutral-400 hover:text-white transition truncate'>
+                <p
+                  className={twMerge(
+                    'text-neutral-400 hover:text-white transition truncate',
+                    playlist.active && 'text-white'
+                  )}
+                >
                   {playlist.name}
                 </p>
               </Link>
