@@ -91,7 +91,7 @@ const SearchPage = () => {
           type='search'
           placeholder='What do you want to listen to?'
           onChange={(e) => setQuery(e.target.value)}
-          className='w-96 rounded-full p-4 pl-12'
+          className='w-96 rounded-full p-4 pl-12 bg-white/[0.03]'
         />
       </section>
       <section className='flex flex-col gap-8'>

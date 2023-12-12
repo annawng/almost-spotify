@@ -19,7 +19,7 @@ const Preview = ({
   return (
     <Link
       href={`/${type}/${id}`}
-      className='flex flex-col gap-4 max-w-[200px] bg-neutral-950 hover:bg-neutral-800 transition duration-300 p-5 rounded-md cursor-pointer'
+      className='flex flex-col gap-4 max-w-[200px] bg-white/[0.025] hover:bg-neutral-800 transition duration-300 p-5 rounded-md cursor-pointer'
     >
       <Image
         src={image}

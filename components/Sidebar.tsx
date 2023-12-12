@@ -55,7 +55,7 @@ const Sidebar = ({ className }: { className?: string }) => {
   );
   return (
     <div className={className}>
-      <div className='hidden md:flex flex-col gap-10 p-6 bg-neutral-900 h-full w-[300px]'>
+      <div className='hidden md:flex flex-col gap-10 px-6 pt-6 bg-white/[0.05] h-full w-[300px]'>
         {userInfo && (
           <ProfilePreview avatar={userInfo.image} name={userInfo.name} />
         )}

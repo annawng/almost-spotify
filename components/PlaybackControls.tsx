@@ -112,7 +112,7 @@ const PlaybackControls = ({
         </button>
         <button
           disabled={disabled}
-          className='bg-white rounded-full p-[2px] disabled:opacity-40 text-black hover:scale-105 transition'
+          className='bg-white rounded-full p-[2px] disabled:opacity-40 text-black hover:enabled:scale-105 transition'
           onClick={togglePlay}
           title={isPlaying ? 'Pause' : 'Play'}
         >

@@ -30,7 +30,7 @@ const Playlists = () => {
       <div className='inline-flex items-center gap-x-2'>
         <h2 className='text-neutral-400 uppercase text-sm'>Playlists</h2>
       </div>
-      <div className='flex flex-col gap-2 overflow-y-scroll'>
+      <div className='flex flex-col gap-2 overflow-y-scroll pb-6'>
         {playlists &&
           playlists.map((playlist: any) => (
             <div key={playlist.id} className='max-w-full'>

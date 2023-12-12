@@ -26,7 +26,7 @@ const PlaybackBar = ({
   return (
     <section
       className={twMerge(
-        'flex justify-between items-center gap-4 py-4 px-6',
+        'flex justify-between items-center gap-4 py-4 px-6 bg-white/[0.025]',
         className
       )}
     >
