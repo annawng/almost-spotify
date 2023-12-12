@@ -33,6 +33,7 @@ const RecentlyPlayed = () => {
 
   useEffect(() => {
     function getCollections() {
+      setCollections([]);
       uris?.forEach(async (uri: string) => {
         const [_, type, id] = uri.split(':');
         const res = await fetchWebApi(token, `v1/${type}s/${id}`, 'GET');
