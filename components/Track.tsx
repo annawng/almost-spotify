@@ -53,7 +53,7 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
       } grid-flow-row items-center gap-4 hover:bg-neutral-800 text-neutral-400 hover:text-white transition px-4 py-2 rounded-md [&>*]:min-w-full group`}
     >
       {index && (
-        <div>
+        <div className='w-6'>
           <p className='text-center group-hover:hidden'>{index}</p>
           <Play
             size={24}
@@ -65,7 +65,11 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
       )}
       <div className='flex gap-6 items-center min-w-0'>
         {image && (
-          <div className={`relative ${!index && 'group-hover:cursor-pointer'}`}>
+          <div
+            className={`relative shrink-0 ${
+              !index && 'group-hover:cursor-pointer'
+            }`}
+          >
             <Image
               src={image}
               alt={name}

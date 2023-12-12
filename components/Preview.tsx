@@ -19,7 +19,7 @@ const Preview = ({
   return (
     <Link
       href={`/${type}/${id}`}
-      className='flex flex-col gap-4 max-w-[200px] bg-white/[0.025] hover:bg-neutral-800 transition duration-300 p-5 rounded-md cursor-pointer'
+      className='flex flex-col gap-3 md:gap-4 min-w-[120px] md:min-w-[160px] lg:min-w-[200px] md:bg-white/[0.025] md:hover:bg-neutral-800 transition duration-300 md:p-5 rounded-md cursor-pointer'
     >
       <Image
         src={image}
@@ -29,8 +29,8 @@ const Preview = ({
         className='aspect-square object-cover box-shadow'
       />
       <div>
-        <p className='font-bold truncate'>{name}</p>
-        <p className='text-neutral-400 truncate'>{by}</p>
+        <p className='font-medium md:font-bold truncate'>{name}</p>
+        <p className='text-neutral-400 text-sm truncate'>{by}</p>
       </div>
     </Link>
   );

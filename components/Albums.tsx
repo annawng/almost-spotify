@@ -34,9 +34,11 @@ const Albums = () => {
   return (
     <>
       {albums &&
-        albums.map((album: CollectionType) => {
-          return <AlbumPreview key={album.id} album={album} />;
-        })}
+        albums.map((album: CollectionType) => (
+          <li key={album.id}>
+            <AlbumPreview album={album} />
+          </li>
+        ))}
     </>
   );
 };

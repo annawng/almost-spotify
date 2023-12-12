@@ -4,6 +4,7 @@ import useToken from '@/hooks/useToken';
 import fetchWebApi from '@/utils/fetchWebApi';
 import Preview, { CollectionType } from './Preview';
 import getArtists from '@/utils/getArtists';
+import Row from './Row';
 
 interface CollectionWithType extends CollectionType {
   type: string;
@@ -78,15 +79,15 @@ const RecentlyPlayed = () => {
       {collections.length > 0 && (
         <section>
           <h2 className='font-semibold text-2xl mb-5'>Jump back in </h2>
-          <ul className='max-w-full grid grid-cols-5 grid-flow-row gap-8'>
+          <Row>
             {collections.map(({ type, ...rest }: CollectionWithType, index) => {
               return (
-                <li key={index}>
+                <li key={index} className='w-[120px] md:w-[160px] lg:w-[200px]'>
                   <Preview collection={rest} type={type} />
                 </li>
               );
             })}
-          </ul>
+          </Row>
         </section>
       )}
     </>

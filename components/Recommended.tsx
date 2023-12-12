@@ -5,6 +5,7 @@ import fetchWebApi from '@/utils/fetchWebApi';
 import getArtists from '@/utils/getArtists';
 import AlbumPreview from './AlbumPreview';
 import { CollectionType } from './Preview';
+import Row from './Row';
 
 const Recommended = () => {
   const token = useToken();
@@ -55,13 +56,13 @@ const Recommended = () => {
       {recommendations && (
         <section>
           <h2 className='font-semibold text-2xl mb-5'>Recommended albums</h2>
-          <ul className='max-w-full grid grid-cols-5 grid-flow-row gap-8'>
+          <Row>
             {recommendations.map((recommendation: CollectionType, index) => (
-              <li key={index}>
+              <li key={index} className='w-[120px] md:w-[160px] lg:w-[200px]'>
                 <AlbumPreview album={recommendation} />
               </li>
             ))}
-          </ul>
+          </Row>
         </section>
       )}
     </>

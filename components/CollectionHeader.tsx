@@ -19,6 +19,7 @@ const CollectionHeader = ({
         width={240}
         height={240}
         className='aspect-square object-cover'
+        priority
       />
       <div className='flex flex-col gap-2 min-w-0'>
         <p className='text-neutral-400 uppercase text-sm'>

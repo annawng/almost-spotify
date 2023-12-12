@@ -10,6 +10,7 @@ import Track, { TrackType } from '@/components/Track';
 import AlbumPreview from '@/components/AlbumPreview';
 import PlaylistPreview from '@/components/PlaylistPreview';
 import { CollectionType } from '@/components/Preview';
+import Row from '@/components/Row';
 
 const SearchPage = () => {
   const token = useToken();
@@ -110,25 +111,31 @@ const SearchPage = () => {
         {albums.length !== 0 && (
           <div>
             <h2 className='font-semibold text-2xl mb-5'>Albums</h2>
-            <ul className='max-w-full grid grid-cols-5 grid-flow-row gap-8'>
+            <Row>
               {albums.map((album: CollectionType) => (
-                <li key={album.id}>
+                <li
+                  key={album.id}
+                  className='w-[120px] md:w-[160px] lg:w-[200px]'
+                >
                   <AlbumPreview album={album} />
                 </li>
               ))}
-            </ul>
+            </Row>
           </div>
         )}
         {playlists.length !== 0 && (
           <div>
             <h2 className='font-semibold text-2xl mb-5'>Playlists</h2>
-            <ul className='max-w-full grid grid-cols-5 grid-flow-row gap-8'>
+            <Row>
               {playlists.map((playlist: CollectionType) => (
-                <li key={playlist.id}>
+                <li
+                  key={playlist.id}
+                  className='w-[120px] md:w-[160px] lg:w-[200px]'
+                >
                   <PlaylistPreview playlist={playlist} />
                 </li>
               ))}
-            </ul>
+            </Row>
           </div>
         )}
       </section>

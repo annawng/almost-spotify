@@ -34,6 +34,10 @@ body,
   background-color: #555;
 }
 
+.overflow-x-scroll::-webkit-scrollbar {
+  display: none;
+}
+
 /*
   Source:
   https://stackoverflow.com/questions/16921582/how-can-i-fade-in-the-scrollbar-on-hover-webkit-only
