@@ -13,6 +13,13 @@ interface CollectionInfo {
   name: string;
   image: string;
   owner: string;
+  ownerImage: string;
+}
+
+enum Owner {
+  CurrentUser,
+  User,
+  Artist,
 }
 
 const Collection = ({
@@ -37,6 +44,20 @@ const Collection = ({
   const userName = useName();
 
   useEffect(() => {
+    async function getOwnerImage(owner: Owner, id?: string) {
+      const res = await fetchWebApi(
+        token,
+        owner === Owner.CurrentUser
+          ? 'me'
+          : owner === Owner.User
+          ? `users/${id}`
+          : `artists/${id}`,
+        'GET'
+      );
+      const json = await res.json();
+      return json.images[0].url;
+    }
+
     async function getPlaylist() {
       const res = await fetchWebApi(token, endpoint, 'GET');
       const json = await res.json();
@@ -48,6 +69,7 @@ const Collection = ({
               name: 'Liked Songs',
               image: 'https://misc.scdn.co/liked-songs/liked-songs-300.png',
               owner: userName,
+              ownerImage: await getOwnerImage(Owner.CurrentUser),
             });
           } else {
             const { name, images, owner } = json;
@@ -55,6 +77,7 @@ const Collection = ({
               name,
               image: images[0].url,
               owner: owner.display_name,
+              ownerImage: await getOwnerImage(Owner.User, owner.id),
             });
           }
         } else {
@@ -63,6 +86,7 @@ const Collection = ({
             name,
             image: images[0].url,
             owner: getArtists(artists),
+            ownerImage: await getOwnerImage(Owner.Artist, artists[0].id),
           });
         }
       }
