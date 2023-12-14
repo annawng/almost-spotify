@@ -140,7 +140,7 @@ const Collection = ({
       {collectionInfo && showHeader && (
         <CollectionHeader {...collectionInfo} isPlaylist={isPlaylist} />
       )}
-      <div className='flex flex-col gap-1 md:gap-0'>
+      <div className='flex flex-col gap-1 md:gap-0 max-w-full'>
         {tracks &&
           tracks.map((track: TrackType, index: number) => (
             <Track

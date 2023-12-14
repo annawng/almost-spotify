@@ -14,7 +14,7 @@ export default async function Layout({
 
   return (
     <SessionProvider session={session}>
-      <div className='grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] h-screen'>
+      <div className='grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] h-full'>
         <Sidebar className='flex min-h-0' />
         <WebPlayback>{children}</WebPlayback>
       </div>
