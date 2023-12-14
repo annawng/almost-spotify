@@ -48,17 +48,19 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
         album && index
           ? 'grid-cols-[0.5fr_12fr_8fr_2fr]'
           : index
-          ? 'grid-cols-[0.5fr_12fr_2fr]'
+          ? 'grid-cols-[12fr_8fr_2fr] md:grid-cols-[0.5fr_12fr_2fr]'
           : 'grid-cols-[12fr_8fr_2fr]'
-      } grid-flow-row items-center gap-4 hover:bg-neutral-800 text-neutral-400 hover:text-white transition px-4 py-2 rounded-md [&>*]:min-w-full group`}
+      } grid-flow-row items-center gap-4 md:hover:bg-neutral-800 text-neutral-400 md:hover:text-white transition md:px-4 py-2 rounded-md [&>*]:min-w-full group cursor-pointer md:cursor-default`}
     >
       {index && (
         <div className='w-6'>
-          <p className='text-center group-hover:hidden'>{index}</p>
+          <p className='hidden text-center md:inline md:group-hover:hidden'>
+            {index}
+          </p>
           <Play
             size={24}
             title={`Play ${name} by ${artist}`}
-            className='text-white m-auto hidden group-hover:block cursor-pointer'
+            className='text-white m-auto hidden md:group-hover:block cursor-pointer'
             onClick={playTrack}
           />
         </div>
@@ -67,7 +69,7 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
         {image && (
           <div
             className={`relative shrink-0 ${
-              !index && 'group-hover:cursor-pointer'
+              !index && 'md:group-hover:cursor-pointer'
             }`}
           >
             <Image
@@ -76,7 +78,7 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
               width={48}
               height={48}
               className={`min-w-[48] ${
-                !index && 'group-hover:brightness-50 transition'
+                !index && 'md:group-hover:brightness-50 transition'
               }`}
             />
 
@@ -84,7 +86,7 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
               <Play
                 size={24}
                 title={`Play ${name} by ${artist}`}
-                className='text-white m-auto hidden group-hover:block absolute top-1/2 left-0 right-0 translate-y-[-50%]'
+                className='text-white m-auto hidden md:group-hover:block absolute top-1/2 left-0 right-0 translate-y-[-50%]'
                 onClick={playTrack}
               />
             )}
@@ -98,7 +100,7 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
       </div>
       {album && (
         <Link
-          className='truncate hover:underline cursor-pointer text-sm'
+          className='truncate md:hover:underline cursor-pointer text-sm'
           href={`/album/${album_id}`}
         >
           {album}

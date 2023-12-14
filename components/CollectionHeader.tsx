@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import H1 from './H1';
 
 const CollectionHeader = ({
   name,
@@ -25,9 +26,9 @@ const CollectionHeader = ({
         <p className='text-neutral-400 uppercase text-sm'>
           {isPlaylist ? 'Playlist' : 'Album'}
         </p>
-        <h1 className='font-bold text-5xl text-ellipsis overflow-hidden leading-tight'>
+        <H1 className='mb-0 text-ellipsis overflow-hidden leading-tight'>
           {name}
-        </h1>
+        </H1>
         <p className='font-medium'>{owner}</p>
       </div>
     </div>

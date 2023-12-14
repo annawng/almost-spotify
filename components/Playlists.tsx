@@ -28,7 +28,7 @@ const Playlists = () => {
   return (
     <div className='h-full flex flex-col gap-4'>
       <div className='inline-flex items-center gap-x-2'>
-        <h2 className='text-neutral-400 uppercase text-sm'>Playlists</h2>
+        <p className='text-neutral-400 uppercase text-sm'>Playlists</p>
       </div>
       <div className='flex flex-col gap-2 overflow-y-scroll pb-6'>
         {playlists &&

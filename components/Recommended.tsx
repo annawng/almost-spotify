@@ -6,6 +6,7 @@ import getArtists from '@/utils/getArtists';
 import AlbumPreview from './AlbumPreview';
 import { CollectionType } from './Preview';
 import Row from './Row';
+import H2 from './H2';
 
 const Recommended = () => {
   const token = useToken();
@@ -55,7 +56,7 @@ const Recommended = () => {
     <>
       {recommendations && (
         <section>
-          <h2 className='font-semibold text-2xl mb-5'>Recommended albums</h2>
+          <H2>Recommended albums</H2>
           <Row>
             {recommendations.map((recommendation: CollectionType, index) => (
               <li key={index} className='w-[120px] md:w-[160px] lg:w-[200px]'>

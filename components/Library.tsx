@@ -38,7 +38,7 @@ const Library: FC<LibraryProps> = () => {
 
   return (
     <section>
-      <h2 className='uppercase text-sm text-neutral-400 pb-4'>Library</h2>
+      <p className='uppercase text-sm text-neutral-400 pb-4'>Library</p>
       <nav className='flex flex-col gap-6'>
         {routes.map((item) => (
           <SidebarItem key={item.label} {...item} />

@@ -1,9 +1,10 @@
 import Collection from '@/components/Collection';
+import H1 from '@/components/H1';
 
 const History = () => {
   return (
     <>
-      <h1 className='font-bold text-4xl mb-6'>Recently played</h1>
+      <H1>Recently played</H1>
       <Collection
         endpoint={`me/player/recently-played?limit=50`}
         isPlaylist

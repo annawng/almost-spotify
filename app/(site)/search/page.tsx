@@ -11,6 +11,8 @@ import AlbumPreview from '@/components/AlbumPreview';
 import PlaylistPreview from '@/components/PlaylistPreview';
 import { CollectionType } from '@/components/Preview';
 import Row from '@/components/Row';
+import H1 from '@/components/H1';
+import H2 from '@/components/H2';
 
 const SearchPage = () => {
   const token = useToken();
@@ -80,10 +82,8 @@ const SearchPage = () => {
 
   return (
     <>
-      <h1 className='font-bold text-4xl mb-5'>
-        Search for a song, album, or playlist
-      </h1>
-      <section className='relative mb-10'>
+      <H1 className='mb-2 md:mb-4'>Search</H1>
+      <section className='relative mb-8 md:mb-10'>
         <Search
           size={20}
           className='absolute top-1/2 translate-y-[-50%] left-4'
@@ -92,13 +92,13 @@ const SearchPage = () => {
           type='search'
           placeholder='What do you want to listen to?'
           onChange={(e) => setQuery(e.target.value)}
-          className='w-96 rounded-full p-4 pl-12 bg-white/[0.03]'
+          className='w-full md:w-[480px] rounded-lg p-4 pl-12 bg-white/[0.03]'
         />
       </section>
       <section className='flex flex-col gap-8'>
         {tracks.length !== 0 && (
           <div>
-            <h2 className='font-semibold text-2xl mb-5'>Songs</h2>
+            <H2>Songs</H2>
             <ul>
               {tracks.map((track: TrackType) => (
                 <li key={track.uri}>
@@ -110,7 +110,7 @@ const SearchPage = () => {
         )}
         {albums.length !== 0 && (
           <div>
-            <h2 className='font-semibold text-2xl mb-5'>Albums</h2>
+            <H2>Albums</H2>
             <Row>
               {albums.map((album: CollectionType) => (
                 <li
@@ -125,7 +125,7 @@ const SearchPage = () => {
         )}
         {playlists.length !== 0 && (
           <div>
-            <h2 className='font-semibold text-2xl mb-5'>Playlists</h2>
+            <H2>Playlists</H2>
             <Row>
               {playlists.map((playlist: CollectionType) => (
                 <li

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import H1 from './H1';
 
 const Header = () => {
   const [message, setMessage] = useState<string>();
@@ -11,7 +12,7 @@ const Header = () => {
     );
   }, []);
 
-  return <h1 className='text-4xl font-bold'>{message}</h1>;
+  return <H1 className='mb-0'>{message}</H1>;
 };
 
 export default Header;

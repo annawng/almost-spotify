@@ -5,6 +5,7 @@ import fetchWebApi from '@/utils/fetchWebApi';
 import Preview, { CollectionType } from './Preview';
 import getArtists from '@/utils/getArtists';
 import Row from './Row';
+import H2 from './H2';
 
 interface CollectionWithType extends CollectionType {
   type: string;
@@ -78,7 +79,7 @@ const RecentlyPlayed = () => {
     <>
       {collections.length > 0 && (
         <section>
-          <h2 className='font-semibold text-2xl mb-5'>Jump back in </h2>
+          <H2>Jump back in </H2>
           <Row>
             {collections.map(({ type, ...rest }: CollectionWithType, index) => {
               return (
