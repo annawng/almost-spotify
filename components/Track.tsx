@@ -53,7 +53,7 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
           : index
           ? 'grid-cols-[12fr_2fr] md:grid-cols-[0.5fr_12fr_2fr]'
           : 'grid-cols-[12fr_2fr] md:grid-cols-[12fr_8fr_2fr]'
-      } grid-flow-row items-center gap-4 md:hover:bg-neutral-800 text-neutral-400 md:hover:text-white transition md:px-4 py-2 rounded-md [&>*]:min-w-full group cursor-pointer md:cursor-default max-w-full`}
+      } grid-flow-row items-center gap-4 md:hover:bg-neutral-800 text-neutral-400 md:hover:text-white transition md:px-4 py-2 rounded-md group cursor-pointer md:cursor-default w-full`}
       onClick={isMobile ? playTrack : undefined}
     >
       {index && !isMobile && (
