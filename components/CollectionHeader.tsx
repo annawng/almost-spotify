@@ -26,9 +26,7 @@ const CollectionHeader = ({
         <p className='text-neutral-400 uppercase text-sm'>
           {isPlaylist ? 'Playlist' : 'Album'}
         </p>
-        <H1 className='mb-0 text-ellipsis overflow-hidden leading-tight'>
-          {name}
-        </H1>
+        <H1 className='text-ellipsis overflow-hidden leading-tight'>{name}</H1>
         <p className='font-medium'>{owner}</p>
       </div>
     </div>

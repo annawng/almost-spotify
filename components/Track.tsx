@@ -6,6 +6,7 @@ import { useDeviceId } from '@/contexts/DeviceContext';
 import useToken from '@/hooks/useToken';
 import fetchWebApi from '@/utils/fetchWebApi';
 import formatTime from '@/utils/formatTime';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 
 export interface TrackType {
   uri: string;
@@ -21,6 +22,8 @@ export interface TrackType {
 const Track = ({ track, index }: { track: TrackType; index?: number }) => {
   const token = useToken();
   const deviceId = useDeviceId();
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768;
 
   const {
     uri,
@@ -46,13 +49,14 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
     <div
       className={`grid ${
         album && index
-          ? 'grid-cols-[0.5fr_12fr_8fr_2fr]'
+          ? 'grid-cols-[12fr_2fr] md:grid-cols-[0.5fr_12fr_8fr_2fr]'
           : index
-          ? 'grid-cols-[12fr_8fr_2fr] md:grid-cols-[0.5fr_12fr_2fr]'
-          : 'grid-cols-[12fr_8fr_2fr]'
+          ? 'grid-cols-[12fr_2fr] md:grid-cols-[0.5fr_12fr_2fr]'
+          : 'grid-cols-[12fr_2fr] md:grid-cols-[12fr_8fr_2fr]'
       } grid-flow-row items-center gap-4 md:hover:bg-neutral-800 text-neutral-400 md:hover:text-white transition md:px-4 py-2 rounded-md [&>*]:min-w-full group cursor-pointer md:cursor-default`}
+      onClick={isMobile ? playTrack : undefined}
     >
-      {index && (
+      {index && !isMobile && (
         <div className='w-6'>
           <p className='hidden text-center md:inline md:group-hover:hidden'>
             {index}
@@ -65,7 +69,7 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
           />
         </div>
       )}
-      <div className='flex gap-6 items-center min-w-0'>
+      <div className='flex gap-4 items-center min-w-0'>
         {image && (
           <div
             className={`relative shrink-0 ${
@@ -98,7 +102,7 @@ const Track = ({ track, index }: { track: TrackType; index?: number }) => {
           <p className='truncate text-sm'>{artist}</p>
         </div>
       </div>
-      {album && (
+      {album && !isMobile && (
         <Link
           className='truncate md:hover:underline cursor-pointer text-sm'
           href={`/album/${album_id}`}
