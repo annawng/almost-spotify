@@ -140,7 +140,7 @@ const PlaybackControls = ({
           <Loop size={20} />
         </button>
       </div>
-      <div className='flex gap-2 w-full items-center'>
+      <div className='flex gap-2 w-[80vw] sm:w-full items-center'>
         <p className='shrink-0 text-xs text-neutral-400'>
           {disabled ? '-:--' : formatTime(progress)}
         </p>

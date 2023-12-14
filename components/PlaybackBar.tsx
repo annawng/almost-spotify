@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import PlaybackControls from './PlaybackControls';
 import SecondaryControls from './SecondaryControls';
 import CurrentlyPlaying from './CurrentlyPlaying';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 
 const PlaybackBar = ({
   isPlaying,
@@ -23,16 +24,21 @@ const PlaybackBar = ({
   setVolume: (volume: number) => void;
   className?: string;
 }) => {
+  const { width } = useWindowDimensions();
+  const isMobile = width < 640;
+
   return (
     <section
       className={twMerge(
-        'flex justify-between items-center gap-4 py-4 px-6 bg-white/[0.025]',
+        'flex justify-center sm:justify-between items-center gap-4 py-4 px-6 bg-white/[0.05]',
         className
       )}
     >
-      <div className='w-[40%]'>
-        {currentTrack && <CurrentlyPlaying currentTrack={currentTrack} />}
-      </div>
+      {!isMobile && (
+        <div className='w-[40%]'>
+          {currentTrack && <CurrentlyPlaying currentTrack={currentTrack} />}
+        </div>
+      )}
       <div className='flex flex-col items-center gap-2 w-[40%] max-w-[722px]'>
         <PlaybackControls
           isPlaying={isPlaying}
@@ -45,11 +51,13 @@ const PlaybackBar = ({
           track={currentTrack}
         />
       </div>
-      <div className='w-[40%] flex items-center gap-4 justify-end'>
-        <SecondaryControls
-          updateVolume={(volume: number) => setVolume(volume)}
-        />
-      </div>
+      {!isMobile && (
+        <div className='w-[40%] flex items-center gap-4 justify-end'>
+          <SecondaryControls
+            updateVolume={(volume: number) => setVolume(volume)}
+          />
+        </div>
+      )}
     </section>
   );
 };

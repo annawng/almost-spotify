@@ -92,7 +92,7 @@ const SearchPage = () => {
           type='search'
           placeholder='What do you want to listen to?'
           onChange={(e) => setQuery(e.target.value)}
-          className='w-full md:w-[480px] rounded-lg p-4 pl-12 bg-white/[0.03]'
+          className='w-full md:w-[480px] rounded-lg p-4 pl-12 bg-white/[0.05]'
         />
       </section>
       <section className='flex flex-col gap-8'>
