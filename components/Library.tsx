@@ -1,15 +1,13 @@
 'use client';
 
-import { FC, useMemo } from 'react';
+import { useMemo } from 'react';
 import SidebarItem from './SidebarItem';
 import { RxCounterClockwiseClock as Clock } from 'react-icons/rx';
 import { HiOutlineHeart as Heart } from 'react-icons/hi';
 import { RiAlbumLine as Album } from 'react-icons/ri';
 import { usePathname } from 'next/navigation';
 
-interface LibraryProps {}
-
-const Library: FC<LibraryProps> = () => {
+const Library = ({ onClick }: { onClick?: () => void }) => {
   const pathname = usePathname();
 
   const routes = useMemo(
@@ -41,7 +39,11 @@ const Library: FC<LibraryProps> = () => {
       <p className='uppercase text-sm text-neutral-400 pb-4'>Library</p>
       <nav className='flex flex-col gap-6'>
         {routes.map((item) => (
-          <SidebarItem key={item.label} {...item} />
+          <SidebarItem
+            key={item.label}
+            onClick={onClick ?? undefined}
+            {...item}
+          />
         ))}
       </nav>
     </section>

@@ -66,7 +66,7 @@ const WebPlayback = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <DeviceContextProvider value={deviceId}>
-      <main className='h-full overflow-y-scroll p-6 bg-white/[0.03]'>
+      <main className='h-full overflow-y-scroll p-6 pt-20 md:pt-6 bg-neutral-950'>
         {children}
       </main>
       {player && (

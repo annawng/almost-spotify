@@ -6,15 +6,17 @@ import { twMerge } from 'tailwind-merge';
 interface SidebarItemProps {
   icon: IconType;
   label: string;
-  active?: boolean;
   href: string;
+  active?: boolean;
+  onClick?: () => void;
 }
 
 const SidebarItem: FC<SidebarItemProps> = ({
   icon: Icon,
   label,
-  active,
   href,
+  active,
+  onClick,
 }) => {
   return (
     <Link
@@ -23,6 +25,7 @@ const SidebarItem: FC<SidebarItemProps> = ({
         `flex flex-row h-auto items-center w-full gap-x-4 text-md font-medium cursor-pointer hover:text-white transition text-neutral-400`,
         active && 'text-white'
       )}
+      onClick={onClick}
     >
       <Icon size={24} />
       <p className='truncate w-full'>{label}</p>

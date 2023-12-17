@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import useToken from '@/hooks/useToken';
@@ -6,7 +6,7 @@ import fetchWebApi from '@/utils/fetchWebApi';
 import { usePathname } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 
-const Playlists = () => {
+const Playlists = ({ onClick }: { onClick?: () => void }) => {
   const pathname = usePathname();
   const token = useToken();
   const [playlists, setPlaylists] = useState<any[] | null>(null);
@@ -26,7 +26,7 @@ const Playlists = () => {
   }, [token, pathname]);
 
   return (
-    <div className='h-full flex flex-col gap-4'>
+    <div className='h-full flex flex-col gap-4' onClick={onClick}>
       <div className='inline-flex items-center gap-x-2'>
         <p className='text-neutral-400 uppercase text-sm'>Playlists</p>
       </div>

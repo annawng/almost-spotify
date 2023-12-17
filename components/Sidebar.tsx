@@ -1,79 +1,71 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
-import { HiOutlineSearch as Search } from 'react-icons/hi';
-import { HiOutlineHome as Home } from 'react-icons/hi2';
+import { useRef, useState, MouseEvent } from 'react';
+import { HiOutlineMenu as Menu } from 'react-icons/hi';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import SidebarItem from './SidebarItem';
-import Library from './Library';
-import ProfilePreview from './ProfilePreview';
-import Playlists from './Playlists';
-import useToken from '@/hooks/useToken';
-import fetchWebApi from '@/utils/fetchWebApi';
-
-interface UserInfoType {
-  name: string;
-  image?: string;
-}
+import Nav from './Nav';
 
 const Sidebar = ({ className }: { className?: string }) => {
-  const pathname = usePathname();
-  const token = useToken();
-  const [userInfo, setUserInfo] = useState<UserInfoType>();
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    async function getUserInfo() {
-      const res = await fetchWebApi(token, 'me', 'GET');
-      const json = await res.json();
-      const { display_name, images } = json;
-      setUserInfo({
-        name: display_name,
-        image: images.length !== 0 ? images[0].url : undefined,
-      });
-    }
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
-    getUserInfo();
-  }, [token]);
-
-  const routes = useMemo(
-    () => [
-      {
-        label: 'Home',
-        active: pathname === '/',
-        href: '/',
-        icon: Home,
-      },
-      {
-        label: 'Search',
-        active: pathname === '/search',
-        href: '/search',
-        icon: Search,
-      },
-    ],
-    [pathname]
-  );
   return (
     <div className={className}>
-      <div className='hidden md:flex flex-col gap-10 px-6 pt-6 bg-white/[0.075] h-full w-[300px]'>
-        {userInfo && (
-          <ProfilePreview avatar={userInfo.image} name={userInfo.name} />
-        )}
-
-        <div>
-          <nav className='flex flex-col gap-6'>
-            {routes.map((item) => (
-              <SidebarItem key={item.label} {...item} />
-            ))}
-          </nav>
-        </div>
-        <div>
-          <Library />
-        </div>
-        <div className='flex-1 min-h-0'>
-          <Playlists />
-        </div>
+      {/* Desktop menu */}
+      <div className='hidden md:flex flex-col gap-10 px-6 pt-6 bg-neutral-900 h-full w-[300px]'>
+        <Nav />
       </div>
+
+      {/* Mobile menu */}
+      <div className='md:hidden absolute left-0 z-10 p-6 w-full bg-neutral-950'>
+        <Menu
+          size={28}
+          className='cursor-pointer'
+          aria-label='Open menu'
+          onClick={toggleMenu}
+        />
+      </div>
+      <AnimatePresence>
+        {showMenu && (
+          <motion.div
+            className='md:hidden absolute w-full h-full bg-black/60 overscroll-none z-10'
+            onClick={(e: MouseEvent) => {
+              if (
+                menuRef.current &&
+                !(menuRef.current as any).contains(e.target)
+              ) {
+                toggleMenu();
+              }
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{
+              opacity: 0,
+            }}
+            transition={{ duration: 0.5, type: 'tween', ease: 'easeInOut' }}
+          >
+            <motion.div
+              className='md:hidden fixed bg-neutral-900 w-[80vw] max-w-xs h-full inset-0 z-20 flex flex-col'
+              ref={menuRef}
+              initial={{ x: '-100vw' }}
+              animate={{ x: '0' }}
+              exit={{
+                x: '-100vw',
+              }}
+              transition={{ duration: 0.5, type: 'tween', ease: 'easeInOut' }}
+            >
+              <div className='flex flex-col overflow-y-auto gap-10 w-full px-6 pt-6 relative'>
+                <Nav onClick={toggleMenu} />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
