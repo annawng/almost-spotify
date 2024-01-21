@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Almost Spotify
+Almost Spotify is a responsive Spotify clone built with Next.js, TypeScript, and Tailwind CSS. It uses NextAuth for authentication, the Spotify API to fetch data about tracks, albums, playlists, and the currrent user, and the Spotify Web Playback SDK to control playback in the application. Users are required to log in with a Spotify Premium account.
 
-## Getting Started
+Supported features:
+- Browsing liked songs, recently played, saved albums, and playlists (each limited to 50)
+- Searching for tracks, playlists, and albums
+- Playing tracks from albums, playlists, or search results
+- Controlling playback (play/pause, skip forward/back, toggle shuffle/loop, adjust volume)
 
-First, run the development server:
+Not supported:
+- Liking tracks
+- Saving albums
+- Creating or saving playlists
+- Searching for users or artists
+- Viewing user or artist profiles
+- Displaying queue (API endpoint doesn't return the correct queue)
+- Anything relating to podcasts
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Because this application is in [development mode](https://developer.spotify.com/documentation/web-api/concepts/quota-modes) and would require all users to be added to an allowlist, it is not deployed publicly.
+
+## Setup
+
+### Installation
+```
+# Clone the repository
+git clone https://github.com/annawng/almost-spotify.git
+
+# Install dependencies
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Variables
+1. Log into the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) using your Spotify account.
+2. [Create an app](https://developer.spotify.com/documentation/web-api/concepts/apps) and locate the Client ID and Client Secret.
+4. At the root of the project, create a file named `.env.local`.
+5. Add the two values to the file as shown below.
+```
+CLIENT_ID=<your-client-id>
+CLIENT_SECRET=<your-client-secret>
+```
+6. Generate a secure random string with the following command. This will be your NextAuth.js secret.
+```
+openssl rand -base64 32
+```
+7. Add this value to `.env.local` as shown below.
+```
+NEXTAUTH_SECRET=<your-random-string>
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Usage
+```
+# Start the development server
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Demo
 
-## Learn More
+### Login
+![almost-spotify-login](https://github.com/annawng/almost-spotify/assets/25410985/6c533798-73ac-4e38-9dc1-252f19e4834f)
 
-To learn more about Next.js, take a look at the following resources:
+### Home
+![almost-spotify-home](https://github.com/annawng/almost-spotify/assets/25410985/0d25c9c3-db03-4cb3-9d99-2bc1736fc669)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Search & Playback Controls
+![almost-spotify-search](https://github.com/annawng/almost-spotify/assets/25410985/a67d09b5-ec46-4f86-bb17-97527b693592)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Library
+![almost-spotify-library](https://github.com/annawng/almost-spotify/assets/25410985/664949ba-e186-42a8-8b75-ed473c9e2439)
 
-## Deploy on Vercel
+### Playlists
+![almost-spotify-playlists](https://github.com/annawng/almost-spotify/assets/25410985/46c15511-6bd5-4be6-a86c-27bc0abe62e5)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Responsive Design
+![almost-spotify-responsive](https://github.com/annawng/almost-spotify/assets/25410985/784e8049-7f01-49a1-94b4-fe6c3d22ff10)
