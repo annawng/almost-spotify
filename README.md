@@ -62,7 +62,7 @@ npm run dev
 ![almost-spotify-home](https://github.com/annawng/almost-spotify/assets/25410985/0d25c9c3-db03-4cb3-9d99-2bc1736fc669)
 
 ### Search & Playback Controls
-![almost-spotify-search](https://github.com/annawng/almost-spotify/assets/25410985/a67d09b5-ec46-4f86-bb17-97527b693592)
+![almost-spotify-search](https://github.com/annawng/almost-spotify/assets/25410985/25c691e0-e526-4e03-a587-a6e5bca123b7)
 
 ### Library
 ![almost-spotify-library](https://github.com/annawng/almost-spotify/assets/25410985/664949ba-e186-42a8-8b75-ed473c9e2439)
