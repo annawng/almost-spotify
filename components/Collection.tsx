@@ -55,6 +55,7 @@ const Collection = ({
         'GET'
       );
       const json = await res.json();
+      console.log(json);
       return json.images[0].url;
     }
 
